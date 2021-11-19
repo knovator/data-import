@@ -1,7 +1,7 @@
 {
-  "name": "react-node-boilerplate",
+  "name": "excel-to-json",
   "version": "1.0.0",
-  "description": "React Node Boilerplate is a MERN stack with GraphQL.",
+  "description": "Excel to JSON data converter",
   "scripts": {
     "dev": "lerna exec -- npm run --parallel dev",
     "lint": "eslint '**/*.{js,jsx}'",
@@ -44,15 +44,7 @@
       "git add"
     ]
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/IgorMCesar/react-node-boilerplate.git"
-  },
-  "author": "",
+  "author": "VimLeSai",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/IgorMCesar/react-node-boilerplate/issues"
-  },
-  "homepage": "https://github.com/IgorMCesar/react-node-boilerplate#readme",
   "dependencies": {}
 }
