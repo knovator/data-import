@@ -1,6 +1,6 @@
 const httpStatus = require('http-status');
 
-const { User } = require('../models');
+const { Users } = require('../models');
 
 /**
  * Load user and append to req.
@@ -8,7 +8,7 @@ const { User } = require('../models');
  */
 exports.load = async (req, res, next, id) => {
   try {
-    const user = await User.get(id);
+    const user = await Users.get(id);
     req.locals = { user };
     return next();
   } catch (error) {
@@ -22,8 +22,7 @@ exports.load = async (req, res, next, id) => {
  */
 exports.list = async (req, res, next) => {
   try {
-    const users = await User.paginate(req.query);
-    // const transformedUsers = users.map(user => user.transform());
+    const users = await Users.paginate(req.query);
     res.json(users);
   } catch (error) {
     next(error);
@@ -35,7 +34,7 @@ exports.list = async (req, res, next) => {
  * @public
  */
 exports.findAll = async (req, res) => {
-  User.find({}, (err, docs) => {
+  Users.find({}, (err, docs) => {
     if (err) {
       console.log(`Error: ` + err);
     } else {
@@ -49,7 +48,7 @@ exports.findAll = async (req, res) => {
 
 exports.create = async (req, res, next) => {
   try {
-    const user = new User(req.body);
+    const user = new Users(req.body);
     const savedUser = await user.save();
     res.status(httpStatus.CREATED);
     res.json(savedUser.transform());

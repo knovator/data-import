@@ -40,7 +40,7 @@ const TemplateSchema = new Schema(
           type: String,
           alias: 'code'
         },
-        id: { type: String, required: true },
+        id: { type: Schema.Types.ObjectId, required: true, ref: 'Projects' },
         nm: { type: String, required: true, alias: 'name' }
       },
       alias: 'project'
@@ -65,6 +65,13 @@ const TemplateSchema = new Schema(
   }
 );
 
+// TemplateSchema.virtual('project', {
+//   ref: 'Projects', // the collection/model name
+//   localField: 'project.id',
+//   foreignField: '_id',
+//   justOne: true // default is false
+// });
+
 // add plugin that converts mongoose to json
 TemplateSchema.plugin(toJSON);
 TemplateSchema.plugin(paginate);
@@ -73,6 +80,6 @@ TemplateSchema.statics.doseNotExist = async function(options) {
   return (await this.where(options).countDocuments()) === 0;
 };
 
-const Templates = model('Templates  ', TemplateSchema);
+const Templates = model('Templates', TemplateSchema);
 
 export default Templates;

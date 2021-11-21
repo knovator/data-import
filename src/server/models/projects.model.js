@@ -40,8 +40,9 @@ const ProjectsSchema = new Schema(
     u: {
       type: {
         uId: {
-          type: String,
-          alias: 'userId'
+          type: Schema.Types.ObjectId,
+          alias: 'userId',
+          ref: 'Users'
         },
         uNm: {
           type: String,

@@ -46,5 +46,7 @@
   },
   "author": "VimLeSai",
   "license": "ISC",
-  "dependencies": {}
+  "dependencies": {
+    "mongoose-seed": "^0.6.0"
+  }
 }

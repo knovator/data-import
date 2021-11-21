@@ -1,18 +1,45 @@
 const httpStatus = require('http-status');
+const { clone, map, merge } = require('lodash');
 
-const { Projects } = require('../models');
+const { Projects, Columns } = require('../models');
 
 /**
  * Load project and append to req.
  * @public
  */
-exports.load = async (req, res, next, id) => {
+exports.getProject = async (req, res, next) => {
+  const { projectId } = req.params;
+
   try {
-    const project = await Projects.get(id);
-    req.locals = { project };
-    return next();
+    // loading project with it's templates
+    const [data] = await Projects.aggregate([
+      { $addFields: { id: { $toString: '$_id' } } },
+      { $match: { id: projectId } },
+      {
+        $lookup: {
+          from: 'templates',
+          pipeline: [{ $match: { 'p.id': projectId } }],
+          as: 'templates'
+        }
+      }
+    ]);
+
+    // making promises of templates's columns
+    const templatePromises = [];
+    data.templates.forEach(async (template, index) =>
+      templatePromises.push(Columns.find({ tId: template._id }))
+    );
+
+    // after columns promises get's resolve making payload and sending it.
+    await Promise.all(templatePromises).then(r => {
+      const payload = clone(data);
+      payload.templates = map(payload.templates, (template, index) => {
+        return merge(template, { columns: r[index] });
+      });
+      res.send(payload);
+    });
   } catch (error) {
-    return next(error);
+    next(error);
   }
 };
 
@@ -23,7 +50,6 @@ exports.load = async (req, res, next, id) => {
 exports.list = async (req, res, next) => {
   try {
     const projects = await Projects.paginate(req.query);
-    // const transformedProjects = projects.map(project => Projects.transform());
     res.json(projects);
   } catch (error) {
     next(error);

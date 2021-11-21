@@ -1,4 +1,4 @@
-import User from './users.model';
+import Users from './users.model';
 import Token from './tokens.model';
 import Columns from './columns.model';
 import Projects from './projects.model';
@@ -11,7 +11,7 @@ import Files from './files.model';
 import Masters from './masters.model';
 import Roles from './roles.model';
 export {
-  User,
+  Users,
   Token,
   Columns,
   Projects,

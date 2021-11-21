@@ -9,7 +9,7 @@ const tokenSchema = new Schema(
     action: String, // ??
     uId: {
       type: ObjectId,
-      ref: 'User'
+      ref: 'Users'
     },
     expires: {
       type: Date,

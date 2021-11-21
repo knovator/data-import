@@ -1,5 +1,6 @@
 import { compare, hash } from 'bcryptjs';
 import mongoose from 'mongoose';
+import { paginate, toJSON } from '../plugins';
 import CommonSchema from './common.model';
 import { RolesSchema } from './roles.model';
 
@@ -25,7 +26,7 @@ const UserSchema = new Schema(
     uNm: {
       type: String,
       validate: {
-        validator: uNm => User.doseNotExist({ uNm }),
+        validator: uNm => Users.doseNotExist({ uNm }),
         message: () => 'Username has already been taken.'
       },
       alias: 'userName'
@@ -35,7 +36,7 @@ const UserSchema = new Schema(
         email: {
           type: String,
           validate: {
-            validator: email => User.doseNotExist({ 'emails.email': email }),
+            validator: email => Users.doseNotExist({ 'emails.email': email }),
             message: () => 'Email has already been taken.'
           }
         },
@@ -51,7 +52,7 @@ const UserSchema = new Schema(
         phn: {
           type: String,
           validate: {
-            validator: phn => User.doseNotExist({ 'tels.phn': phn }),
+            validator: phn => Users.doseNotExist({ 'tels.phn': phn }),
             message: () => 'phone has already been taken.'
           },
           alias: 'phone'
@@ -102,6 +103,7 @@ const UserSchema = new Schema(
     },
     r: {
       type: [RolesSchema],
+      ref: 'Roles',
       alias: 'roles'
     }
   },
@@ -112,6 +114,10 @@ const UserSchema = new Schema(
 
 UserSchema.add(CommonSchema.IPSchema);
 UserSchema.add(CommonSchema.ActionBySchema);
+
+// add plugin that converts mongoose to json
+UserSchema.plugin(toJSON);
+UserSchema.plugin(paginate);
 
 UserSchema.pre('save', async function() {
   if (this.isModified('password')) {
@@ -133,6 +139,6 @@ UserSchema.methods.matchesPassword = function(password) {
   return compare(password, this.password);
 };
 
-const User = model('User', UserSchema);
+const Users = model('Users', UserSchema);
 
-export default User;
+export default Users;
