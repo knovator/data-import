@@ -18,4 +18,8 @@ router
   .post(upload.single('sample'), controller.create)
   .patch(upload.single('sample'), controller.update);
 
+router
+  .route('/:templateId/process')
+  .post(upload.fields([{ name: 'files', maxCount: 2 }]), controller.process);
+
 module.exports = router;

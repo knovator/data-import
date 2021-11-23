@@ -65,16 +65,19 @@ const TemplateSchema = new Schema(
   }
 );
 
-// TemplateSchema.virtual('project', {
-//   ref: 'Projects', // the collection/model name
-//   localField: 'project.id',
-//   foreignField: '_id',
-//   justOne: true // default is false
-// });
+TemplateSchema.virtual('columns', {
+  ref: 'Columns', // the collection/model name
+  localField: '_id',
+  foreignField: 'tId',
+  justOne: false // default is false
+});
 
 // add plugin that converts mongoose to json
 TemplateSchema.plugin(toJSON);
 TemplateSchema.plugin(paginate);
+
+TemplateSchema.set('toObject', { virtuals: true });
+TemplateSchema.set('toJSON', { virtuals: true });
 
 TemplateSchema.statics.doseNotExist = async function(options) {
   return (await this.where(options).countDocuments()) === 0;

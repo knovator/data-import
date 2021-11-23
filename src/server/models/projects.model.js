@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { paginate, toJSON } from '../plugins';
+import { paginate, toJSON, fieldsAlias } from '../plugins';
 import CommonSchemas from './common.model';
 
 const { Schema, model } = mongoose;
@@ -57,13 +57,24 @@ const ProjectsSchema = new Schema(
   }
 );
 
+// adding virtual to load templates of projects
+ProjectsSchema.virtual('templates', {
+  ref: 'Templates', // the collection/model name
+  localField: '_id',
+  foreignField: 'p.id',
+  justOne: false // default is false
+});
+
 ProjectsSchema.add(CommonSchemas.IPSchema);
 ProjectsSchema.add(CommonSchemas.ActionBySchema);
 
 // add plugin that converts mongoose to json
 ProjectsSchema.plugin(toJSON);
 ProjectsSchema.plugin(paginate);
+ProjectsSchema.plugin(fieldsAlias);
 
+ProjectsSchema.set('toObject', { virtuals: true });
+ProjectsSchema.set('toJSON', { virtuals: true });
 // ProjectsSchema.pre('save', async function() {
 //   // Todo: add user details from token
 // });

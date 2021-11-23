@@ -1,6 +1,7 @@
 const httpStatus = require('http-status');
 
 const { Templates } = require('../models');
+const templateService = require('../services/templates.service');
 
 /**
  * Load template and append to req.
@@ -65,4 +66,12 @@ exports.create = async (req, res, next) => {
 exports.update = (req, res, next) => {
   console.log('req', req.body, req.query);
   res.send(httpStatus.OK);
+};
+
+/**
+ * Process File to JSON
+ * @private
+ */
+exports.process = async (req, res, next) => {
+  await templateService.processData(req, res, next);
 };

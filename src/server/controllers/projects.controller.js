@@ -24,6 +24,8 @@ exports.getProject = async (req, res, next) => {
       }
     ]);
 
+    // console.log(' data.toAliasedFieldsObject();', JSON.stringify(data));
+
     // making promises of templates's columns
     const templatePromises = [];
     data.templates.forEach(async (template, index) =>
@@ -41,6 +43,15 @@ exports.getProject = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+exports.show = async (req, res, next) => {
+  const { projectId } = req.params;
+  const project = await Projects.findOne({ _id: projectId })
+    .populate('templates')
+    .populate('columns');
+
+  res.send(project);
 };
 
 /**
