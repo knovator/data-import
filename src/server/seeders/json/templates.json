@@ -12,12 +12,6 @@
         "$oid": "619a1e52fc13ae1184000004"
       },
       "nm": "StringERP"
-    },
-    "createdAt": {
-      "$date": "2021-11-19T10:18:26.362Z"
-    },
-    "updatedAt": {
-      "$date": "2021-11-19T10:18:26.362Z"
     }
   },
   {
@@ -40,12 +34,6 @@
       "mT": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
       "path": "resources/1637318568918-sample_notes.xlsx",
       "s": 12683
-    },
-    "createdAt": {
-      "$date": "2021-11-19T10:42:48.962Z"
-    },
-    "updatedAt": {
-      "$date": "2021-11-19T10:42:48.962Z"
     }
   }
 ]
