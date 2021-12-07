@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Users = require('./seeders/users.seeder');
 const Projects = require('./seeders/projects.seeder');
+const Templates = require('./seeders/templates.seeder');
+const Columns = require('./seeders/columns.seeder');
 const { mongo } = require('./config/vars');
 
 const mongoURL = mongo.uri;
@@ -12,7 +14,9 @@ const mongoURL = mongo.uri;
  */
 exports.seedersList = {
   Users,
-  Projects
+  Projects,
+  Templates,
+  Columns
 };
 /**
  * Connect to mongodb implementation
