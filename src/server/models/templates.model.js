@@ -28,35 +28,32 @@ const TemplateSchema = new Schema(
       },
       alias: 'code'
     },
-
     cbUrl: {
       type: String,
       alias: 'callbackUrl'
     },
     p: {
-      type: {
-        cd: {
-          require: true,
-          type: String,
-          alias: 'code'
-        },
-        id: { type: Schema.Types.ObjectId, required: true, ref: 'Projects' },
-        nm: { type: String, required: true, alias: 'name' }
+      type: Object,
+      cd: {
+        require: true,
+        type: String,
+        alias: 'project.code'
       },
+      id: { type: Schema.Types.ObjectId, required: true, ref: 'Projects', alias: 'project.id' },
+      nm: { type: String, required: true, alias: 'project.name' },
       alias: 'project'
     },
     sample: {
-      type: {
-        fNm: { type: String, alias: 'fileName' },
-        oNm: {
-          type: String,
-          alias: 'originalName'
-        },
-        enc: { type: String, alias: 'encoding' },
-        mT: { type: String, alias: 'mimetype' },
-        path: { type: String },
-        s: { type: Number }
-      }
+      type: Object,
+      fNm: { type: String, alias: 'sample.fileName' },
+      oNm: {
+        type: String,
+        alias: 'sample.originalName'
+      },
+      enc: { type: String, alias: 'sample.encoding' },
+      mT: { type: String, alias: 'sample.mimetype' },
+      path: { type: String },
+      s: { type: Number, alias: 'sample.size' }
     },
     info: Object
   },

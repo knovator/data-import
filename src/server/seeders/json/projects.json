@@ -3,10 +3,12 @@
     "id": {
       "$oid": "619a1e52fc13ae1184000004"
     },
-    "name": "Conney",
-    "code": "cgayter0",
+    "name": "StringERP",
+    "code": "STRING_ERP",
     "user": {
-      "userId": "619a07bdfc13ae3e5d000209",
+      "userId": {
+        "$oid": "619a07bdfc13ae3e5d000209"
+      },
       "userName": "VimLeSai"
     }
   },
@@ -15,9 +17,11 @@
       "$oid": "619a1e52fc13ae1184000005"
     },
     "name": "Myrta",
-    "code": "myaus1",
+    "code": "MYAUS1",
     "user": {
-      "userId": "619a07bdfc13ae3e5d000209",
+      "userId": {
+        "$oid": "619a07bdfc13ae3e5d000209"
+      },
       "userName": "VimLeSai"
     }
   },
@@ -26,9 +30,11 @@
       "$oid": "619a1e52fc13ae1184000006"
     },
     "name": "Gilberte",
-    "code": "glupton2",
+    "code": "GLUPTON2",
     "user": {
-      "userId": "619a07bdfc13ae3e5d000209",
+      "userId": {
+        "$oid": "619a07bdfc13ae3e5d000209"
+      },
       "userName": "VimLeSai"
     }
   },
@@ -39,7 +45,9 @@
     "name": "Agosto",
     "code": "acarnier3",
     "user": {
-      "userId": "619a07bdfc13ae3e5d000209",
+      "userId": {
+        "$oid": "619a07bdfc13ae3e5d000209"
+      },
       "userName": "VimLeSai"
     }
   }

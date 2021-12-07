@@ -1,0 +1,51 @@
+[
+  {
+    "_id": {
+      "$oid": "619779f2daf596ee8a6a92ed"
+    },
+    "nm": "Party Data",
+    "cd": "PARTY_DATA",
+    "cbUrl": "",
+    "p": {
+      "cd": "StringERP",
+      "id": {
+        "$oid": "619a1e52fc13ae1184000004"
+      },
+      "nm": "StringERP"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T10:18:26.362Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-19T10:18:26.362Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "61977fa8bb68707637013338"
+    },
+    "nm": "Item Data",
+    "cd": "T02",
+    "cbUrl": "",
+    "p": {
+      "cd": "StringERP",
+      "id": {
+        "$oid": "619a1e52fc13ae1184000004"
+      },
+      "nm": "StringERP"
+    },
+    "sample": {
+      "fNm": "1637318568918-sample_notes.xlsx",
+      "enc": "7bit",
+      "mT": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "path": "resources/1637318568918-sample_notes.xlsx",
+      "s": 12683
+    },
+    "createdAt": {
+      "$date": "2021-11-19T10:42:48.962Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-19T10:42:48.962Z"
+    }
+  }
+]

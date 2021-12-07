@@ -1,7 +1,6 @@
 import { Seeder } from 'mongoose-data-seed';
 import { Templates } from '../models';
-
-const data = [{}];
+const templates = require('./json/templates.json');
 
 class TemplatesSeeder extends Seeder {
   async shouldRun() {
@@ -11,7 +10,7 @@ class TemplatesSeeder extends Seeder {
   }
 
   async run() {
-    return Templates.create(data);
+    return Templates.create(templates);
   }
 }
 

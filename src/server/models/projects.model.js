@@ -38,18 +38,15 @@ const ProjectsSchema = new Schema(
 
     // we may not need this because of uBy and cBy
     u: {
-      type: {
-        uId: {
-          type: Schema.Types.ObjectId,
-          alias: 'userId',
-          ref: 'Users'
-        },
-        uNm: {
-          type: String,
-          alias: 'userName'
-        }
+      uId: {
+        type: Schema.Types.ObjectId,
+        alias: 'user.userId',
+        ref: 'Users'
       },
-      alias: 'user'
+      uNm: {
+        type: String,
+        alias: 'user.userName'
+      }
     }
   },
   {
