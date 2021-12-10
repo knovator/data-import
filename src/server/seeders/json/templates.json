@@ -1,31 +1,23 @@
 [
   {
-    "_id": {
-      "$oid": "619779f2daf596ee8a6a92ed"
-    },
+    "_id": "619779f2daf596ee8a6a92ed",
     "nm": "Party Data",
     "cd": "PARTY_DATA",
     "cbUrl": "",
     "p": {
       "cd": "StringERP",
-      "id": {
-        "$oid": "619a1e52fc13ae1184000004"
-      },
+      "id": "619a1e52fc13ae1184000004",
       "nm": "StringERP"
     }
   },
   {
-    "_id": {
-      "$oid": "61977fa8bb68707637013338"
-    },
+    "_id": "61977fa8bb68707637013338",
     "nm": "Item Data",
     "cd": "T02",
     "cbUrl": "",
     "p": {
       "cd": "StringERP",
-      "id": {
-        "$oid": "619a1e52fc13ae1184000004"
-      },
+      "id": "619a1e52fc13ae1184000004",
       "nm": "StringERP"
     },
     "sample": {

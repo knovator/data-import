@@ -1,11 +1,7 @@
 [
   {
-    "_id": {
-      "$oid": "61979e2c80486337a6c559de"
-    },
-    "tId": {
-      "$oid": "619779f2daf596ee8a6a92ed"
-    },
+    "_id": "61979e2c80486337a6c559de",
+    "tId": "619779f2daf596ee8a6a92ed",
     "nm": "#",
     "k": "#",
     "aK": "",
@@ -18,12 +14,8 @@
     "seq": 0
   },
   {
-    "_id": {
-      "$oid": "61979f9b891c4c54369cd364"
-    },
-    "tId": {
-      "$oid": "619779f2daf596ee8a6a92ed"
-    },
+    "_id": "61979f9b891c4c54369cd364",
+    "tId": "619779f2daf596ee8a6a92ed",
     "nm": "Name",
     "k": "name",
     "r": true,
@@ -35,12 +27,8 @@
     "seq": 1
   },
   {
-    "_id": {
-      "$oid": "61979fe7891c4c54369cd368"
-    },
-    "tId": {
-      "$oid": "619779f2daf596ee8a6a92ed"
-    },
+    "_id": "61979fe7891c4c54369cd368",
+    "tId": "619779f2daf596ee8a6a92ed",
     "nm": "Email",
     "k": "email",
     "r": false,
@@ -52,12 +40,8 @@
     "seq": 2
   },
   {
-    "_id": {
-      "$oid": "6197a038891c4c54369cd36c"
-    },
-    "tId": {
-      "$oid": "619779f2daf596ee8a6a92ed"
-    },
+    "_id": "6197a038891c4c54369cd36c",
+    "tId": "619779f2daf596ee8a6a92ed",
     "nm": "Credit Days",
     "k": "credit_days",
     "r": false,
@@ -69,12 +53,8 @@
     "seq": 4
   },
   {
-    "_id": {
-      "$oid": "6197a064891c4c54369cd370"
-    },
-    "tId": {
-      "$oid": "619779f2daf596ee8a6a92ed"
-    },
+    "_id": "6197a064891c4c54369cd370",
+    "tId": "619779f2daf596ee8a6a92ed",
     "nm": "Address",
     "k": "address",
     "r": true,
@@ -86,12 +66,8 @@
     "seq": 5
   },
   {
-    "_id": {
-      "$oid": "6197a110891c4c54369cd374"
-    },
-    "tId": {
-      "$oid": "619779f2daf596ee8a6a92ed"
-    },
+    "_id": "6197a110891c4c54369cd374",
+    "tId": "619779f2daf596ee8a6a92ed",
     "nm": "Phone",
     "k": "phone",
     "r": true,
@@ -103,12 +79,8 @@
     "seq": 3
   },
   {
-    "_id": {
-      "$oid": "6197a38d891c4c54369cd37c"
-    },
-    "tId": {
-      "$oid": "619779f2daf596ee8a6a92ed"
-    },
+    "_id": "6197a38d891c4c54369cd37c",
+    "tId": "619779f2daf596ee8a6a92ed",
     "nm": "GST No",
     "k": "gst_no",
     "r": true,
@@ -120,12 +92,8 @@
     "seq": 6
   },
   {
-    "_id": {
-      "$oid": "6197a414891c4c54369cd380"
-    },
-    "tId": {
-      "$oid": "619779f2daf596ee8a6a92ed"
-    },
+    "_id": "6197a414891c4c54369cd380",
+    "tId": "619779f2daf596ee8a6a92ed",
     "nm": "Agent",
     "k": "agent",
     "r": false,
@@ -137,12 +105,8 @@
     "seq": 7
   },
   {
-    "_id": {
-      "$oid": "6197a42c891c4c54369cd384"
-    },
-    "tId": {
-      "$oid": "619779f2daf596ee8a6a92ed"
-    },
+    "_id": "6197a42c891c4c54369cd384",
+    "tId": "619779f2daf596ee8a6a92ed",
     "nm": "Collector",
     "k": "collector",
     "r": false,
@@ -154,12 +118,8 @@
     "seq": 8
   },
   {
-    "_id": {
-      "$oid": "6197a43e891c4c54369cd388"
-    },
-    "tId": {
-      "$oid": "619779f2daf596ee8a6a92ed"
-    },
+    "_id": "6197a43e891c4c54369cd388",
+    "tId": "619779f2daf596ee8a6a92ed",
     "nm": "Sales Person",
     "k": "sales_person",
     "r": false,
@@ -171,12 +131,8 @@
     "seq": 9
   },
   {
-    "_id": {
-      "$oid": "6197a46f891c4c54369cd38c"
-    },
-    "tId": {
-      "$oid": "619779f2daf596ee8a6a92ed"
-    },
+    "_id": "6197a46f891c4c54369cd38c",
+    "tId": "619779f2daf596ee8a6a92ed",
     "nm": "Cheque No",
     "k": "cheque_no",
     "r": false,
@@ -188,12 +144,8 @@
     "seq": 10
   },
   {
-    "_id": {
-      "$oid": "6197a479891c4c54369cd390"
-    },
-    "tId": {
-      "$oid": "619779f2daf596ee8a6a92ed"
-    },
+    "_id": "6197a479891c4c54369cd390",
+    "tId": "619779f2daf596ee8a6a92ed",
     "nm": "Bank",
     "k": "bank",
     "r": false,
@@ -205,12 +157,8 @@
     "seq": 11
   },
   {
-    "_id": {
-      "$oid": "6197a4ce891c4c54369cd394"
-    },
-    "tId": {
-      "$oid": "619779f2daf596ee8a6a92ed"
-    },
+    "_id": "6197a4ce891c4c54369cd394",
+    "tId": "619779f2daf596ee8a6a92ed",
     "nm": "Order Limit",
     "k": "order_limit",
     "r": false,
@@ -223,12 +171,8 @@
     "seq": 12
   },
   {
-    "_id": {
-      "$oid": "6197a5a1891c4c54369cd398"
-    },
-    "tId": {
-      "$oid": "619779f2daf596ee8a6a92ed"
-    },
+    "_id": "6197a5a1891c4c54369cd398",
+    "tId": "619779f2daf596ee8a6a92ed",
     "nm": "Trade Discount",
     "k": "trade_disccount",
     "r": false,
@@ -241,12 +185,8 @@
     "seq": 13
   },
   {
-    "_id": {
-      "$oid": "6197a5ee891c4c54369cd39c"
-    },
-    "tId": {
-      "$oid": "619779f2daf596ee8a6a92ed"
-    },
+    "_id": "6197a5ee891c4c54369cd39c",
+    "tId": "619779f2daf596ee8a6a92ed",
     "nm": "Cash Discount",
     "k": "cash_disccount",
     "r": false,

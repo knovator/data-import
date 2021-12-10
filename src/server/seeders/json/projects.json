@@ -1,8 +1,6 @@
 [
   {
-    "id": {
-      "$oid": "619a1e52fc13ae1184000004"
-    },
+    "_id": "619a1e52fc13ae1184000004",
     "name": "StringERP",
     "code": "STRING_ERP",
     "user": {
@@ -13,9 +11,7 @@
     }
   },
   {
-    "id": {
-      "$oid": "619a1e52fc13ae1184000005"
-    },
+    "_id": "619a1e52fc13ae1184000005",
     "name": "Myrta",
     "code": "MYAUS1",
     "user": {
@@ -26,9 +22,7 @@
     }
   },
   {
-    "id": {
-      "$oid": "619a1e52fc13ae1184000006"
-    },
+    "_id": "619a1e52fc13ae1184000006",
     "name": "Gilberte",
     "code": "GLUPTON2",
     "user": {
@@ -39,9 +33,7 @@
     }
   },
   {
-    "id": {
-      "$oid": "619a1e52fc13ae1184000007"
-    },
+    "_id": "619a1e52fc13ae1184000007",
     "name": "Agosto",
     "code": "acarnier3",
     "user": {

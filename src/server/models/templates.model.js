@@ -64,7 +64,7 @@ const TemplateSchema = new Schema(
 
 TemplateSchema.virtual('columns', {
   ref: 'Columns', // the collection/model name
-  localField: '_id',
+  localField: 'id',
   foreignField: 'tId',
   justOne: false // default is false
 });
