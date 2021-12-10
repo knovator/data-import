@@ -1,46 +1,38 @@
 [
   {
     "_id": "619a1e52fc13ae1184000004",
-    "name": "StringERP",
-    "code": "STRING_ERP",
-    "user": {
-      "userId": {
-        "$oid": "619a07bdfc13ae3e5d000209"
-      },
-      "userName": "VimLeSai"
+    "nm": "StringERP",
+    "cd": "STRING_ERP",
+    "u": {
+      "uId": "619a07bdfc13ae3e5d000209",
+      "uNm": "VimLeSai"
     }
   },
   {
     "_id": "619a1e52fc13ae1184000005",
-    "name": "Myrta",
-    "code": "MYAUS1",
-    "user": {
-      "userId": {
-        "$oid": "619a07bdfc13ae3e5d000209"
-      },
-      "userName": "VimLeSai"
+    "nm": "Myrta",
+    "cd": "MYAUS1",
+    "u": {
+      "uId": "619a07bdfc13ae3e5d000209",
+      "uNm": "VimLeSai"
     }
   },
   {
     "_id": "619a1e52fc13ae1184000006",
-    "name": "Gilberte",
-    "code": "GLUPTON2",
-    "user": {
-      "userId": {
-        "$oid": "619a07bdfc13ae3e5d000209"
-      },
-      "userName": "VimLeSai"
+    "nm": "Gilberte",
+    "cd": "GLUPTON2",
+    "u": {
+      "uId": "619a07bdfc13ae3e5d000209",
+      "uNm": "VimLeSai"
     }
   },
   {
     "_id": "619a1e52fc13ae1184000007",
-    "name": "Agosto",
-    "code": "acarnier3",
-    "user": {
-      "userId": {
-        "$oid": "619a07bdfc13ae3e5d000209"
-      },
-      "userName": "VimLeSai"
+    "nm": "Agosto",
+    "cd": "acarnier3",
+    "u": {
+      "uId": "619a07bdfc13ae3e5d000209",
+      "uNm": "VimLeSai"
     }
   }
 ]
