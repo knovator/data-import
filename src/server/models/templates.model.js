@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { paginate, toJSON } from '../plugins';
+import { paginate, toJSON, fieldsAlias } from '../plugins';
 
 const { Schema, model } = mongoose;
 
@@ -33,15 +33,19 @@ const TemplateSchema = new Schema(
       alias: 'callbackUrl'
     },
     p: {
-      type: Object,
       cd: {
         require: true,
         type: String,
         alias: 'project.code'
       },
-      id: { type: Schema.Types.ObjectId, required: true, ref: 'Projects', alias: 'project.id' },
-      nm: { type: String, required: true, alias: 'project.name' },
-      alias: 'project'
+      id: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: 'Projects',
+        alias: 'project.id'
+        // autopopulate: true
+      },
+      nm: { type: String, required: true, alias: 'project.name' }
     },
     sample: {
       type: Object,
@@ -58,7 +62,8 @@ const TemplateSchema = new Schema(
     info: Object
   },
   {
-    timestamps: true
+    timestamps: true,
+    strict: false
   }
 );
 
@@ -70,8 +75,10 @@ TemplateSchema.virtual('columns', {
 });
 
 // add plugin that converts mongoose to json
-TemplateSchema.plugin(toJSON);
-TemplateSchema.plugin(paginate);
+TemplateSchema.plugin(toJSON, { virtuals: true });
+TemplateSchema.plugin(paginate, { virtuals: true });
+TemplateSchema.plugin(fieldsAlias);
+// TemplateSchema.plugin(require('mongoose-autopopulate'));
 
 TemplateSchema.set('toObject', { virtuals: true });
 TemplateSchema.set('toJSON', { virtuals: true });

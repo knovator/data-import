@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { paginate, toJSON } from './../plugins';
+import { paginate, toJSON, fieldsAlias } from './../plugins';
 
 const { Schema, model } = mongoose;
 
@@ -85,6 +85,7 @@ const ColumnSchema = new Schema(
 // add plugin that converts mongoose to json
 ColumnSchema.plugin(toJSON);
 ColumnSchema.plugin(paginate);
+ColumnSchema.plugin(fieldsAlias);
 
 ColumnSchema.statics.doseNotExist = async function(options) {
   return (await this.where(options).countDocuments()) === 0;

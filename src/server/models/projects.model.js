@@ -50,7 +50,8 @@ const ProjectsSchema = new Schema(
     }
   },
   {
-    timestamps: true
+    timestamps: true,
+    strict: false
   }
 );
 

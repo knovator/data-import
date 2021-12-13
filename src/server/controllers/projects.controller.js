@@ -24,8 +24,6 @@ exports.getProject = async (req, res, next) => {
       }
     ]);
 
-    // console.log(' data.toAliasedFieldsObject();', JSON.stringify(data));
-
     // making promises of templates's columns
     const templatePromises = [];
     data.templates.forEach(async (template, index) =>
@@ -46,11 +44,29 @@ exports.getProject = async (req, res, next) => {
 };
 
 exports.show = async (req, res, next) => {
+  const ObjectId = require('mongoose').Types.ObjectId;
   const { projectId } = req.params;
-  const project = await Projects.findOne({ _id: projectId })
-    .populate('templates')
-    .populate('columns');
+  let project = {};
+  if (ObjectId.isValid(projectId)) {
+    project = await Projects.findOne({ _id: projectId }).populate({
+      path: 'templates',
+      projection: { project: -1, p: -1 }
+    });
+    // console.log(' data.toAliasedFieldsObject();', project.templates);
+    const templates = [];
+    project.templates.forEach(template => {
+      templates.push(template.toAliasedFieldsObject());
+    });
+    project = project.toAliasedFieldsObject();
+    project.templates = templates;
 
+    // .populate('columns');
+  } else {
+    project = await Projects.findOne({ cd: projectId }).populate('templates');
+    project = project.toAliasedFieldsObject();
+    // .populate('columns');
+  }
+  console.log('project', project);
   res.send(project);
 };
 

@@ -9,7 +9,7 @@ const { DT_TO_JOI_DT_MAPPING } = require('./constant');
 exports.normalizeFileName = fileName => {
   console.log('fileName', fileName);
   if (typeof fileName === 'string') {
-    let name = fileName.replace('[^a-zA-Z0-9_-]', '_');
+    let name = fileName.replaceAll('[^a-zA-Z0-9_-]', '_');
     name = name.toLowerCase();
 
     return name;
