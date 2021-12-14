@@ -48,25 +48,35 @@ exports.show = async (req, res, next) => {
   const { projectId } = req.params;
   let project = {};
   if (ObjectId.isValid(projectId)) {
-    project = await Projects.findOne({ _id: projectId }).populate({
-      path: 'templates',
-      projection: { project: -1, p: -1 }
-    });
-    // console.log(' data.toAliasedFieldsObject();', project.templates);
+    project = await Projects.findOne({ _id: projectId }, ['nm', 'cd', 'cbUrl']).populate(
+      'templates',
+      {
+        nm: 1,
+        cd: 1,
+        cbUrl: 1,
+        p: -1
+      }
+    );
+  } else {
+    project = await Projects.findOne({ cd: projectId }, ['nm', 'cd', 'cbUrl']).populate(
+      'templates',
+      {
+        nm: 1,
+        cd: 1,
+        cbUrl: 1,
+        p: -1
+      }
+    );
+  }
+
+  if (project) {
     const templates = [];
     project.templates.forEach(template => {
       templates.push(template.toAliasedFieldsObject());
     });
     project = project.toAliasedFieldsObject();
     project.templates = templates;
-
-    // .populate('columns');
-  } else {
-    project = await Projects.findOne({ cd: projectId }).populate('templates');
-    project = project.toAliasedFieldsObject();
-    // .populate('columns');
   }
-  console.log('project', project);
   res.send(project);
 };
 

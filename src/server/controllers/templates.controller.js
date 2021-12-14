@@ -7,11 +7,10 @@ const templateService = require('../services/templates.service');
  * Load template and append to req.
  * @public
  */
-exports.load = async (req, res, next, id) => {
+exports.load = async (req, res, next) => {
   try {
-    const template = await Templates.get(id);
-    req.locals = { template };
-    return next();
+    const template = await templateService.getTemplateById(req.params.templateId);
+    res.send(template);
   } catch (error) {
     return next(error);
   }

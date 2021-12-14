@@ -67,6 +67,7 @@ exports.columnsToJoiSchema = async columns => {
  * @returns {Object} mapping object
  */
 exports.mapColNameToKey = async columns => {
+  console.log('columns', columns);
   const obj = {};
   columns.forEach(column => {
     obj[column.nm] = column.k;

@@ -9,6 +9,7 @@ const ColumnSchema = new Schema(
   {
     tId: {
       type: Types.ObjectId,
+      ref: 'Templates',
       required: true
     },
     nm: {
@@ -79,6 +80,7 @@ const ColumnSchema = new Schema(
   },
   {
     timestamps: true
+    // strict: false
   }
 );
 
@@ -86,6 +88,9 @@ const ColumnSchema = new Schema(
 ColumnSchema.plugin(toJSON);
 ColumnSchema.plugin(paginate);
 ColumnSchema.plugin(fieldsAlias);
+
+ColumnSchema.set('toObject', { virtuals: true });
+ColumnSchema.set('toJSON', { virtuals: true });
 
 ColumnSchema.statics.doseNotExist = async function(options) {
   return (await this.where(options).countDocuments()) === 0;

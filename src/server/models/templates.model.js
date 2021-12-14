@@ -62,21 +62,21 @@ const TemplateSchema = new Schema(
     info: Object
   },
   {
-    timestamps: true,
-    strict: false
+    timestamps: true
+    // strict: false
   }
 );
 
 TemplateSchema.virtual('columns', {
   ref: 'Columns', // the collection/model name
-  localField: 'id',
+  localField: '_id',
   foreignField: 'tId',
   justOne: false // default is false
 });
 
 // add plugin that converts mongoose to json
-TemplateSchema.plugin(toJSON, { virtuals: true });
-TemplateSchema.plugin(paginate, { virtuals: true });
+TemplateSchema.plugin(toJSON);
+TemplateSchema.plugin(paginate);
 TemplateSchema.plugin(fieldsAlias);
 // TemplateSchema.plugin(require('mongoose-autopopulate'));
 

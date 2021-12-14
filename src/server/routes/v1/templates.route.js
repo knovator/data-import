@@ -12,6 +12,8 @@ const controller = require('../../controllers/templates.controller');
 
 const router = express.Router();
 
+router.get('/:templateId', controller.load);
+
 router
   .route('/')
   .get(controller.list)
@@ -19,7 +21,7 @@ router
   .patch(upload.single('sample'), controller.update);
 
 router
-  .route('/:templateId/process')
+  .route('/:templateId/process-file')
   .post(upload.fields([{ name: 'files', maxCount: 2 }]), controller.process);
 
 module.exports = router;

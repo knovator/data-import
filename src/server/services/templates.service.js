@@ -23,7 +23,7 @@ exports.createTemplate = async templateBody => {
  * @returns {Promise<Template>}
  */
 exports.getTemplateById = async templateId => {
-  return Templates.findOne({ _id: templateId }).populate('columns');
+  return Templates.findById(templateId).populate('columns');
 };
 
 /**
@@ -90,7 +90,6 @@ exports.processData = async (req, res, next) => {
 
   // TODO: Set Directory based on user and it's project
   const filePath = path.resolve(path.join(__dirname, '../resources/' + file.filename));
-
   // reading XLSX/CSV file
   const workbook = XLSX.readFile(filePath);
 
@@ -101,7 +100,6 @@ exports.processData = async (req, res, next) => {
    *  */
 
   const { Sheets, SheetNames } = workbook;
-
   const payload = [];
   const errors = [];
   const response = [];
@@ -115,6 +113,8 @@ exports.processData = async (req, res, next) => {
       data
     });
   });
+
+  // console.log('workbook--data', payload);
 
   const schema = await columnsToJoiSchema(template.columns);
   const nameToKeyMapping = await mapColNameToKey(template.columns);
@@ -155,10 +155,15 @@ exports.processData = async (req, res, next) => {
     return next(apiError);
   }
 
+  if (errors.length) {
+    res.status(httpStatus.UNPROCESSABLE_ENTITY).end({
+      errors,
+      message: 'Please correct file data and try again !'
+    });
+  }
   res.send({
     template,
-    // schema: schema.describe(),
-    response,
+    message: "Your file is processing, we'll update you via mail",
     errors
   });
 };
