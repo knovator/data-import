@@ -21,7 +21,6 @@ module.exports = async function(msg) {
      *  */
     const workbook = XLSX.readFile(filePath);
     const { Sheets, SheetNames } = workbook;
-    //   console.log('..ww...', workbook);
     const payload = [];
     SheetNames.forEach(Sheet => {
       // converting sheet's data into JSON

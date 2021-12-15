@@ -26,9 +26,10 @@ exports.getProject = async (req, res, next) => {
 
     // making promises of templates's columns
     const templatePromises = [];
-    data.templates.forEach(async (template, index) =>
-      templatePromises.push(Columns.find({ tId: template._id }))
-    );
+    data.templates &&
+      data.templates.forEach(async (template, index) =>
+        templatePromises.push(Columns.find({ tId: template._id }))
+      );
 
     // after columns promises get's resolve making payload and sending it.
     await Promise.all(templatePromises).then(r => {

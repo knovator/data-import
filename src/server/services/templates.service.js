@@ -77,7 +77,7 @@ exports.deleteTemplateById = async templateId => {
 exports.processData = async (req, res, next) => {
   const { templateId } = req.params;
   const template = await this.getTemplateById(templateId);
-
+  console.log('template', req);
   const { files = [] } = req.files;
   const [file] = files;
 
@@ -89,5 +89,10 @@ exports.processData = async (req, res, next) => {
     message: "Your file is processing, we'll update you via mail"
   });
 
-  await publishToQueue(QUEUES.processingFile, { filePath, template, body: req.body });
+  const payload = {
+    filePath,
+    template,
+    ...(JSON.parse(req.body.additionalData || {}) || {})
+  };
+  await publishToQueue(QUEUES.processingFile, payload);
 };
