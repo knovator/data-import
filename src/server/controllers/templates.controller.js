@@ -1,5 +1,4 @@
 const httpStatus = require('http-status');
-
 const { Templates } = require('../models');
 const templateService = require('../services/templates.service');
 

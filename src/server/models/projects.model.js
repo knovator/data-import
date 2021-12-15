@@ -56,12 +56,13 @@ const ProjectsSchema = new Schema(
 );
 
 // adding virtual to load templates of projects
-ProjectsSchema.virtual('templates', {
-  ref: 'Templates', // the collection/model name
-  localField: '_id',
-  foreignField: 'p.id',
-  justOne: false // default is false
-});
+// ProjectsSchema.virtual('templates', {
+//   ref: 'Templates', // the collection/model name
+//   localField: '_id',
+//   foreignField: 'p.id',
+//   justOne: false, // default is false
+//   strictPopulate: false
+// });
 
 ProjectsSchema.add(CommonSchemas.IPSchema);
 ProjectsSchema.add(CommonSchemas.ActionBySchema);

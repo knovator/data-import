@@ -8,7 +8,7 @@ const router = express.Router();
 /**
  * Load project when API with projectId route parameter is hit
  */
-router.get('/:projectId', controller.show);
+router.get('/:projectId', controller.getProject);
 // router.get('/project', controller.load);
 router
   .route('/')

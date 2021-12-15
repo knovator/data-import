@@ -12,3 +12,9 @@ exports.DT_TO_JOI_DT_MAPPING = {
   ANY: 'any',
   REGEX: 'any'
 };
+
+exports.QUEUES = {
+  processingFile: 'PROCESSING_FILE',
+  convertingToJSON: 'CONVERTING_TO_JSON',
+  sendingJSON: 'SENDING_JSON'
+};

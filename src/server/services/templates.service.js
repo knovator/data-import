@@ -1,11 +1,9 @@
 const httpStatus = require('http-status');
 const { Templates } = require('../models');
 const APIError = require('../errors/api-error');
-const XLSX = require('xlsx');
-// const chunk = require('lodash/chunk');
 const path = require('path');
-const { columnsToJoiSchema, mapColNameToKey } = require('../utils/helper');
-const { isEmpty } = require('lodash');
+const { QUEUES } = require('../utils/constant');
+const { publishToQueue } = require('./../rabbitMQ/service');
 
 /**
  * Create a template
@@ -79,91 +77,17 @@ exports.deleteTemplateById = async templateId => {
 exports.processData = async (req, res, next) => {
   const { templateId } = req.params;
   const template = await this.getTemplateById(templateId);
-  // console.log('tem ===> ', tem);
 
-  // const { dataLimit = 1000, cbkUrl } = template;
   const { files = [] } = req.files;
+  const [file] = files;
 
   if (!files.length) return new APIError(httpStatus.EXPECTATION_FAILED);
 
-  const [file] = files;
-
   // TODO: Set Directory based on user and it's project
   const filePath = path.resolve(path.join(__dirname, '../resources/' + file.filename));
-  // reading XLSX/CSV file
-  const workbook = XLSX.readFile(filePath);
-
-  /**
-   * All Sheets and their data list
-   * @param {Array} SheetNames => Sheets List
-   * @param {Object} Sheets => data list
-   *  */
-
-  const { Sheets, SheetNames } = workbook;
-  const payload = [];
-  const errors = [];
-  const response = [];
-
-  SheetNames.forEach(Sheet => {
-    // converting sheet's data into JSON
-    const data = XLSX.utils.sheet_to_json(Sheets[Sheet]);
-    // pushing data into payload
-    payload.push({
-      Sheet,
-      data
-    });
-  });
-
-  // console.log('workbook--data', payload);
-
-  const schema = await columnsToJoiSchema(template.columns);
-  const nameToKeyMapping = await mapColNameToKey(template.columns);
-
-  // do validation and manage errors
-  payload.forEach(sheet => {
-    const rows = [];
-    sheet.data.flat().forEach((data, dIndex) => {
-      const obj = {};
-      Object.entries(nameToKeyMapping).forEach(entry => {
-        const [name, key] = entry;
-        obj[key] = data[name];
-      });
-      const { error, value } = schema.validate(obj);
-      if (!isEmpty(value)) rows.push(value);
-      if (error)
-        errors.push({
-          Sheet: sheet.Sheet,
-          rowNumber: dIndex,
-          data: error._original,
-          error: error.details
-        });
-    });
-    response.push({
-      sheet: sheet.Sheet,
-      rows
-    });
-  });
-
-  if (errors.length > 0) {
-    const apiError = new APIError({
-      message:
-        "Requested file didn't pass the required validations. Please check your mail for more details.",
-      status: httpStatus.EXPECTATION_FAILED,
-      stack: errors
-    });
-
-    return next(apiError);
-  }
-
-  if (errors.length) {
-    res.status(httpStatus.UNPROCESSABLE_ENTITY).end({
-      errors,
-      message: 'Please correct file data and try again !'
-    });
-  }
   res.send({
-    template,
-    message: "Your file is processing, we'll update you via mail",
-    errors
+    message: "Your file is processing, we'll update you via mail"
   });
+
+  await publishToQueue(QUEUES.processingFile, { filePath, template, body: req.body });
 };
