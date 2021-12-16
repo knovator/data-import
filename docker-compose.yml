@@ -1,0 +1,32 @@
+services:
+  app:
+    image: node:14-alpine
+    container_name: data-import-node
+    command: sh -c "cd src/server && yarn install && yarn run dev"
+    ports:
+      - 3000:3000
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
+      MYSQL_DB: todos
+
+  rabbitMq:
+    image: rabbitmq:3.9-alpine
+    container_name: rabbitMq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      # AMQP protocol port
+      - '5672:5672'
+      # HTTP management UI
+      - '15672:15672'
+    volumes:
+      - 'rabbitmq_data:/data'
+
+volumes:
+  rabbitmq_data:
