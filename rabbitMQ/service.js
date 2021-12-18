@@ -1,19 +1,24 @@
 /* eslint-disable handle-callback-err */
-const amqp = require('amqplib/callback_api');
 const vars = require('../config/vars');
-let ch = null;
+const amqp = require('amqp-connection-manager');
 
-amqp.connect(vars.redditMQConn, function(err, conn) {
-  conn.createChannel(function(err, channel) {
-    ch = channel;
-  });
+// Create a new connection manager
+const connection = amqp.connect([vars.redditMQConn]);
+connection.on('connect', () => console.log('RabbitMQ::Connected!'));
+connection.on('disconnect', err => console.log('RabbitMQ::Disconnected.', err));
+// Ask the connection manager for a ChannelWrapper.  Specify a setup function to
+// run every time we reconnect to the broker.
+const chanelWrapper = connection.createChannel({
+  json: true,
+  noAck: true,
+  persistent: true
 });
 
 process.on('exit', code => {
-  ch.close();
-  console.log(`Closing rabbitmq channel`);
+  chanelWrapper.close();
+  console.log(`Closing rabbitMQ channel`);
 });
 
 exports.publishToQueue = async (queueName, data) => {
-  ch.sendToQueue(queueName, Buffer.from(JSON.stringify(data)));
+  chanelWrapper.sendToQueue(queueName, data);
 };

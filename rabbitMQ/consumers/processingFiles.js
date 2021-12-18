@@ -1,6 +1,7 @@
 const { QUEUES } = require('../../utils/constant');
 const XLSX = require('xlsx');
 const { publishToQueue } = require('../service');
+const { jobStartLog, jobEndLog, jobErrorLog } = require('../../utils/log');
 
 /**
  *
@@ -8,14 +9,14 @@ const { publishToQueue } = require('../service');
  * @returns nothing
  */
 module.exports = async function(msg) {
-  // converting buffer data to Object
-  const data = JSON.parse(msg.content) || {};
-  const { filePath, ...rest } = data;
+  jobStartLog(QUEUES.processingFile, msg.fields);
 
   try {
-    // reading XLSX/CSV file
+    // converting buffer data to Object
+    const data = JSON.parse(msg.content) || {};
+    const { filePath, ...rest } = data;
     /**
-     * All Sheets and their data list
+     * reading XLSX/CSV file, All Sheets and their data list
      * @param {Array} SheetNames => Sheets List
      * @param {Object} Sheets => data list
      *  */
@@ -31,9 +32,10 @@ module.exports = async function(msg) {
         data
       });
     });
-
-    publishToQueue(QUEUES.convertingToJSON, { payload, ...rest });
+    jobEndLog(QUEUES.processingFile);
+    await publishToQueue(QUEUES.convertingToJSON, { payload, ...rest });
   } catch (e) {
+    jobErrorLog(QUEUES.processingFile, e);
     return e;
   }
 };

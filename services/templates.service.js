@@ -95,5 +95,6 @@ exports.processData = async (req, res, next) => {
     template,
     ...additionalData
   };
+  console.log('service calling it');
   await publishToQueue(QUEUES.processingFile, payload);
 };

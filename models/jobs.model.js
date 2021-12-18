@@ -5,13 +5,12 @@ const { Schema, model } = mongoose;
 
 const JobsSchema = new Schema(
   {
-    id: {
-      type: Schema.Types.ObjectId,
-      required: true
-    },
-    jType: String,
-    uId: Schema.Types.ObjectId,
-    tId: Schema.Types.ObjectId,
+    rk: { type: String, alias: 'routingKey' },
+    dtg: { type: String, alias: 'deliveryTag' },
+    ctg: { type: String, alias: 'consumerTag' },
+    exh: { type: String, alias: 'exchange' },
+    uId: { type: Schema.Types.ObjectId, ref: 'Users', required: true },
+    tId: { type: Schema.Types.ObjectId, ref: 'Templates', required: true },
     cbUrl: String,
     status: String,
     startTime: Schema.Types.Date,

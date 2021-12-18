@@ -55,7 +55,7 @@ exports.jsonSchemaToJoiSchema = jsonSchema => {
  * @param {Array} columns
  * @return {Joi} joi schema
  */
-exports.columnsToJoiSchema = async columns => {
+exports.columnsToJoiSchema = async (columns = []) => {
   const jsonSchema = await this.columnsToJSONSchema(columns);
   const joiSchema = await this.jsonSchemaToJoiSchema(jsonSchema);
   return joiSchema;
@@ -67,7 +67,6 @@ exports.columnsToJoiSchema = async columns => {
  * @returns {Object} mapping object
  */
 exports.mapColNameToKey = async columns => {
-  console.log('columns', columns);
   const obj = {};
   columns.forEach(column => {
     obj[column.nm] = column.k;

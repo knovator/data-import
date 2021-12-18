@@ -1,20 +1,32 @@
 /* eslint-disable handle-callback-err */
-var amqp = require('amqplib/callback_api');
+// var amqp = require('amqplib/callback_api');
+require('@babel/core').transformSync('code', {
+  plugins: ['@babel/plugin-transform-modules-commonjs']
+});
 const { QUEUES } = require('../utils/constant');
 const { processFile, convert2JSON, sendJSON } = require('./consumer');
 const vars = require('../config/vars');
+const amqp = require('amqp-connection-manager');
 
-amqp.connect(vars.redditMQConn, function(err, conn) {
-  conn.createChannel(
-    function(err, ch) {
-      ch.assertQueue(QUEUES.convertingToJSON, { durable: true });
-      ch.assertQueue(QUEUES.processingFile, { durable: true });
-      ch.assertQueue(QUEUES.sendingJSON, { durable: true });
+// Create a new connection manager
+const connection = amqp.connect([vars.redditMQConn]);
+connection.on('connect', () => console.log('RabbitMQ::Connected!'));
+connection.on('disconnect', err => console.log('RabbitMQ::Disconnected.', err));
+// Ask the connection manager for a ChannelWrapper.  Specify a setup function to
+// run every time we reconnect to the broker.
+const chanelWrapper = connection.createChannel({
+  json: true,
+  noAck: true,
+  persistent: true
+});
 
-      ch.consume(QUEUES.processingFile, processFile);
-      ch.consume(QUEUES.convertingToJSON, convert2JSON);
-      ch.consume(QUEUES.sendingJSON, sendJSON);
-    },
-    { noAck: true, persistent: true }
-  );
+chanelWrapper.addSetup(channel => {
+  return Promise.all([
+    channel.assertQueue(QUEUES.convertingToJSON, { durable: true }),
+    channel.assertQueue(QUEUES.processingFile, { durable: true }),
+    channel.assertQueue(QUEUES.sendingJSON, { durable: true }),
+    channel.consume(QUEUES.processingFile, processFile),
+    channel.consume(QUEUES.convertingToJSON, convert2JSON),
+    channel.consume(QUEUES.sendingJSON, sendJSON)
+  ]);
 });

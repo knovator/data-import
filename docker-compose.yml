@@ -1,22 +1,7 @@
 services:
-  app:
-    image: node:14-alpine
-    container_name: data-import-node
-    command: sh -c "cd src/server && yarn install && yarn run dev"
-    ports:
-      - 3000:3000
-    working_dir: /app
-    volumes:
-      - ./:/app
-    environment:
-      MYSQL_HOST: mysql
-      MYSQL_USER: root
-      MYSQL_PASSWORD: secret
-      MYSQL_DB: todos
-
   rabbitMq:
-    image: rabbitmq:3.9-alpine
-    container_name: rabbitMq
+    image: rabbitmq:management-alpine
+    container_name: data-import-rabbitMq
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
@@ -26,7 +11,53 @@ services:
       # HTTP management UI
       - '15672:15672'
     volumes:
-      - 'rabbitmq_data:/data'
+      - 'rabbitmq:/data/rabbitmq'
+    networks:
+      - data-import-network
+  # mongo:
+  #   image: mongo
+  #   restart: unless-stopped
+  #   container_name: data-import-mongo
+  #   env_file: ./.env
+  #   depends_on:
+  #     - rabbitMQ
+  #   environment:
+  #     - MONGO_INITDB_ROOT_USERNAME=$MONGODB_USER
+  #     - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD
+  #   ports:
+  #     - $MONGODB_LOCAL_PORT:$MONGODB_DOCKER_PORT
+  #   volumes:
+  #     - db:/data/db
+  #   networks:
+  #     - data-import-network
+  # app:
+  #   depends_on:
+  #     - mongo
+  #     - rabbitMQ
+  #   build:
+  #     context: .
+  #     dockerfile: ./Dockerfile
+  #   restart: always
+  #   working_dir: /app
+  #   # image: node:14-alpine
+  #   container_name: data-import-node
+  #   command: sh -c "node rabbitMQ/service.js && node rabbitMQ/worker.js"
+  #   ports:
+  #     - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+  #   networks:
+  #     - data-import-network
+  # stdin_open: true
+  # tty: true
+  # volumes:
+  #   - .:/code
+  # links:
+  #   - rabbitMq
+  #   - mongo
+
+networks:
+  data-import-network:
+    driver: bridge
 
 volumes:
-  rabbitmq_data:
+  rabbitmq:
+  # db:
