@@ -2,7 +2,7 @@ services:
   rabbitMQ:
     image: rabbitmq:management-alpine
     restart: unless-stopped
-    container_name: data-import-rabbitMQ
+    container_name: data-import-rabbitmq
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
@@ -36,11 +36,11 @@ services:
   #     - knovator
   app:
     depends_on:
-      - mongo
+      # - mongo
       - rabbitMQ
     links:
       - rabbitMQ
-      - mongo
+      # - mongo
     build:
       context: ./
       dockerfile: ./Dockerfile
