@@ -28,9 +28,16 @@ const TemplateSchema = new Schema(
       },
       alias: 'code'
     },
-    cbUrl: {
-      type: String,
-      alias: 'callbackUrl'
+    cb: {
+      m: {
+        type: String,
+        enum: ['GET', 'POST', 'PATCH', 'PUT'],
+        alias: 'callback.method'
+      },
+      u: {
+        type: String,
+        alias: 'callback.url'
+      }
     },
     p: {
       cd: {

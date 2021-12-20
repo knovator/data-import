@@ -19,10 +19,10 @@ module.exports = async msg => {
     const { template = {}, response = [], errors, ...other } = data;
     const rows = map(response, x => x.rows).flat();
 
-    if (!template.callbackUrl) return new Error('Callback Url Not Found !');
+    if (!template.callback) return new Error('Callback Url Not Found !');
 
     setAPIConfig({
-      baseUrl: template.callbackUrl,
+      baseUrl: template.callback.u,
       handleCache: false
     });
 
@@ -30,6 +30,7 @@ module.exports = async msg => {
     const promise = map(chunkedData, data =>
       fetchUrl({
         url: '/',
+        method: template.callback.m,
         data: {
           template,
           ...other,
@@ -37,8 +38,6 @@ module.exports = async msg => {
         }
       })
     );
-
-    console.log('colors.bgYellow', promise);
 
     const jobPayload = {
       ...msg.fields,

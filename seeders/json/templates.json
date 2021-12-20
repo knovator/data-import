@@ -3,7 +3,10 @@
     "_id": "619779f2daf596ee8a6a92ed",
     "nm": "Party Data",
     "cd": "PARTY_DATA",
-    "cbUrl": "",
+    "cb": {
+      "m": "POST",
+      "u": "https://api.yarn.knovator.in/api/admin/imports"
+    },
     "p": {
       "cd": "StringERP",
       "id": "619a1e52fc13ae1184000004",
@@ -14,7 +17,10 @@
     "_id": "61977fa8bb68707637013338",
     "nm": "Item Data",
     "cd": "T02",
-    "cbUrl": "",
+    "cb": {
+      "m": "POST",
+      "u": "https://api.yarn.knovator.in/api/admin/imports"
+    },
     "p": {
       "cd": "StringERP",
       "id": "619a1e52fc13ae1184000004",

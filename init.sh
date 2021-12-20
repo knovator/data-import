@@ -1,4 +1,5 @@
 #!/bin/sh
-npm start &
-npm rabbitMQ/service.js &
-npm rabbitMQ/worker.js
+node rabbitMQ/worker.js &
+md-seed run &
+npm run start &
+npm run seed:clean

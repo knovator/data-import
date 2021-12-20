@@ -25,5 +25,5 @@ module.exports = {
     username: process.env.EMAIL_USERNAME,
     password: process.env.EMAIL_PASSWORD
   },
-  redditMQConn: process.env.REDDIT_MQ_CONN
+  redditMQConn: process.env.RABBIT_MQ_CONN
 };
