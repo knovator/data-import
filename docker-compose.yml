@@ -47,6 +47,12 @@ services:
     restart: always
     working_dir: /app
     container_name: data-import-node
+    command:
+      [
+        "sh",
+        "-c",
+        "/bin/wait-for-it.sh rabbitMQ:5672 -- sh ./init.sh"
+      ]
     ports:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
     environment:
