@@ -24,7 +24,7 @@ module.exports = async msg => {
     console.table(template.callback);
 
     setAPIConfig({
-      baseUrl: template.callback.u,
+      baseUrl: template.callback.url,
       handleCache: false
     });
 
@@ -32,7 +32,7 @@ module.exports = async msg => {
     const promise = map(chunkedData, data =>
       fetchUrl({
         url: '',
-        method: template.callback.m,
+        method: template.callback.method,
         data: {
           template,
           ...other,
