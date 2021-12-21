@@ -32,7 +32,7 @@ module.exports = async msg => {
     const promise = map(chunkedData, data =>
       fetchUrl({
         url: '',
-        method: template.callback.method,
+        type: template.callback.method,
         data: {
           template,
           ...other,
