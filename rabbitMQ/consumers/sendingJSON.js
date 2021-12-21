@@ -21,6 +21,8 @@ module.exports = async msg => {
 
     if (!template.callback) return new Error('Callback Url Not Found !');
 
+    console.table(template.callback);
+
     setAPIConfig({
       baseUrl: template.callback.u,
       handleCache: false
@@ -29,7 +31,7 @@ module.exports = async msg => {
     const chunkedData = chunk(rows, 1000);
     const promise = map(chunkedData, data =>
       fetchUrl({
-        url: '/',
+        url: '',
         method: template.callback.m,
         data: {
           template,
