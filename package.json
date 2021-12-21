@@ -9,8 +9,8 @@
     "seed": "md-seed run",
     "start": "node -r esm index.js",
     "dev": "nodemon -r esm -r dotenv/config index.js dotenv_config_path=../../.env",
-    "md-service": "node rabbitMQ/service.js",
-    "md-worker": "node rabbitMQ/worker.js"
+    "mq-service": "node rabbitMQ/service.js",
+    "mq-worker": "node rabbitMQ/worker.js"
   },
   "keywords": [],
   "author": "VimLeSai",
