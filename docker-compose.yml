@@ -63,6 +63,40 @@ services:
     volumes:
       - .:/app
 
+  rabbit-service:
+    depends_on:
+      - app
+    working_dir: /rabbitmq
+    build:
+      context: ./
+      dockerfile: ./rabbitMQ/Dockerfile
+    container_name: rabbit-service
+    command:
+      [
+        "sh",
+        "-c",
+        "/bin/wait-for-it.sh app:1111 -- npm run mq-service"
+      ]
+    networks:
+      - knovator
+
+  rabbit-worker:
+    working_dir: /rabbitmq
+    build:
+      context: ./
+      dockerfile: ./rabbitMQ/Dockerfile
+    depends_on:
+      - rabbit-service
+    container_name: rabbit-worker
+    command:
+      [
+        "sh",
+        "-c",
+        "/bin/wait-for-it.sh app:1111 -- npm run mq-worker"
+      ]
+    networks:
+      - knovator
+
 networks:
   knovator:
     driver: bridge
