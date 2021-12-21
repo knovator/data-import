@@ -10,7 +10,6 @@ connection.on('disconnect', err => console.log('RabbitMQ::Disconnected.', err));
 // run every time we reconnect to the broker.
 const chanelWrapper = connection.createChannel({
   json: true,
-  noAck: true,
   persistent: true
 });
 
@@ -20,5 +19,5 @@ process.on('exit', code => {
 });
 
 exports.publishToQueue = async (queueName, data) => {
-  chanelWrapper.sendToQueue(queueName, data);
+  chanelWrapper.sendToQueue(queueName, data, { durable: false });
 };

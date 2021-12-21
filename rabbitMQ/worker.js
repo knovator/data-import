@@ -16,17 +16,28 @@ connection.on('disconnect', err => console.log('RabbitMQ::Disconnected.', err));
 // run every time we reconnect to the broker.
 const chanelWrapper = connection.createChannel({
   json: true,
-  noAck: true,
-  persistent: true
+  persistent: false
 });
 
 chanelWrapper.addSetup(channel => {
   return Promise.all([
-    channel.assertQueue(QUEUES.convertingToJSON, { durable: true }),
-    channel.assertQueue(QUEUES.processingFile, { durable: true }),
-    channel.assertQueue(QUEUES.sendingJSON, { durable: true }),
-    channel.consume(QUEUES.processingFile, processFile),
-    channel.consume(QUEUES.convertingToJSON, convert2JSON),
-    channel.consume(QUEUES.sendingJSON, sendJSON)
+    channel.assertQueue(QUEUES.convertingToJSON, {
+      durable: false
+      // exclusive: true,
+      // autoDelete: true
+    }),
+    channel.assertQueue(QUEUES.processingFile, {
+      durable: false
+      // exclusive: true,
+      // autoDelete: true
+    }),
+    channel.assertQueue(QUEUES.sendingJSON, {
+      durable: false
+      // exclusive: true,
+      //  autoDelete: true
+    }),
+    channel.consume(QUEUES.processingFile, processFile, { noAck: true }),
+    channel.consume(QUEUES.convertingToJSON, convert2JSON, { noAck: true }),
+    channel.consume(QUEUES.sendingJSON, sendJSON, { noAck: true })
   ]);
 });
