@@ -18,7 +18,7 @@
   "dependencies": {
     "@babel/core": "^7.16.5",
     "@babel/plugin-transform-modules-commonjs": "^7.16.5",
-    "@knovator/api": "^0.0.4",
+    "@knovator/api": "^0.0.5",
     "amqp-connection-manager": "^3.7.0",
     "amqplib": "^0.8.0",
     "axios": "^0.24.0",
