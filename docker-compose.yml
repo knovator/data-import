@@ -12,12 +12,12 @@ services:
       # HTTP management UI
       - 15672:15672
     volumes:
-      # - 'rabbitmq:/data/rabbitmq'
       - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
       - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
-      - ./conf/myrabbit.conf:/etc/rabbitmq/rabbitmq.config
+      # - ./conf/myrabbit.conf:/etc/rabbitmq/rabbitmq.config
     networks:
       - knovator
+
   # mongo:
   #   image: mongo
   #   restart: unless-stopped
@@ -47,6 +47,7 @@ services:
     restart: always
     working_dir: /app
     container_name: data-import-node
+    tty: true
     command:
       [
         "sh",

@@ -16,5 +16,5 @@ RUN npm install -g concurrently
 ADD init.sh /init.sh
 RUN chmod +x /init.sh
 
-# CMD ["sh","-c","/bin/wait-for-it.sh rabbitMQ:15672 -- sh ./init.sh"]
-CMD ["concurrently", "npm run start", "npm run mq-service", "npm run mq-worker"]
+CMD ["sh","-c","/bin/wait-for-it.sh rabbitMQ:15672 -- sh ./init.sh"]
+# CMD ["concurrently", "npm run start", "npm run mq-service", "npm run mq-worker"]

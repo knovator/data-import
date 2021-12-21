@@ -1,4 +1,2 @@
 #!/bin/sh
-node rabbitMQ/service.js &
-node rabbitMQ/worker.js &
-npm run start
+concurrently "npm run start" "npm run mq-service" "npm run mq-worker"
