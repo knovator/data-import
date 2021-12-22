@@ -25,7 +25,7 @@ module.exports = async msg => {
       Project: template.project?.nm,
       Template: template.nm,
       User: other?.user.name,
-      Company: other?.company.name,
+      Company: other?.company?.name,
       Total: rows.length,
       Callback: template.callback
     });
