@@ -22,10 +22,10 @@ module.exports = async msg => {
     if (!template.callback) return new Error('Callback Url Not Found !');
 
     console.table({
-      Project: template.project.nm,
+      Project: template.project?.nm,
       Template: template.nm,
-      User: user.name,
-      Company: company.name,
+      User: other?.user.name,
+      Company: other?.company.name,
       Total: rows.length,
       Callback: template.callback
     });
