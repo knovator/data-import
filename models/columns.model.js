@@ -24,10 +24,10 @@ const ColumnSchema = new Schema(
     k: {
       type: String,
       required: true,
-      validate: {
-        validator: k => Columns.doseNotExist({ k }),
-        message: () => 'key has already been taken.'
-      },
+      // validate: {
+      //   validator: k => Columns.doseNotExist({ k }),
+      //   message: () => 'key has already been taken.'
+      // },
       alias: 'key'
     },
     aK: {
