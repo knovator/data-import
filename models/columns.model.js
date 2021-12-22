@@ -15,10 +15,10 @@ const ColumnSchema = new Schema(
     nm: {
       type: String,
       required: true,
-      validate: {
-        validator: nm => Columns.doseNotExist({ nm }),
-        message: () => 'Column name has already been taken.'
-      },
+      // validate: {
+      //   validator: nm => Columns.doseNotExist({ nm }),
+      //   message: () => 'Column name has already been taken.'
+      // },
       alias: 'name'
     },
     k: {
@@ -32,10 +32,10 @@ const ColumnSchema = new Schema(
     },
     aK: {
       type: String,
-      validate: {
-        validator: aK => Columns.doseNotExist({ aK }),
-        message: () => 'alternate key has already been taken.'
-      },
+      // validate: {
+      //   validator: aK => Columns.doseNotExist({ aK }),
+      //   message: () => 'alternate key has already been taken.'
+      // },
       alias: 'altKey'
     },
     r: {
