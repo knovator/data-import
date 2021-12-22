@@ -21,7 +21,16 @@ module.exports = async msg => {
 
     if (!template.callback) return new Error('Callback Url Not Found !');
 
-    console.table(template.callback);
+    console.table({
+      Project: template.project.nm,
+      Template: template.nm,
+      User: user.name,
+      Company: company.name,
+      Total: rows.length,
+      Callback: template.callback
+    });
+
+    console.table({ errors });
 
     setAPIConfig({
       baseUrl: template.callback.url,
