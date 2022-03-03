@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import { paginate, toJSON } from '../plugins';
+const mongoose = require('mongoose');
+const { paginate, toJSON, fieldsAlias } = require('./../plugins');
 
 const { Schema, model } = mongoose;
 
@@ -47,4 +47,4 @@ SettingsSchema.statics.doseNotExist = async function(options) {
 
 const Settings = model('Settings', SettingsSchema);
 
-export default Settings;
+module.exports = Settings;

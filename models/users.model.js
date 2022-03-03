@@ -1,8 +1,8 @@
-import { compare, hash } from 'bcryptjs';
-import mongoose from 'mongoose';
-import { paginate, toJSON } from '../plugins';
-import CommonSchema from './common.model';
-import { RolesSchema } from './roles.model';
+const { compare, hash } = require('bcryptjs');
+const mongoose = require('mongoose');
+const { paginate, toJSON } = require('../plugins');
+const CommonSchema = require('./common.model');
+const { RolesSchema } = require('./roles.model');
 
 const { Schema, model } = mongoose;
 
@@ -141,4 +141,4 @@ UserSchema.methods.matchesPassword = function(password) {
 
 const Users = model('Users', UserSchema);
 
-export default Users;
+module.exports = Users;

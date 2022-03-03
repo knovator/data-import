@@ -1,5 +1,5 @@
-import { Seeder } from 'mongoose-data-seed';
-import { Columns } from '../models';
+const { Seeder } = require('mongoose-data-seed');
+const { Columns } = require('../models');
 const columns = require('./json/columns.json');
 
 class ColumnsSeeder extends Seeder {
@@ -14,4 +14,4 @@ class ColumnsSeeder extends Seeder {
   }
 }
 
-export default ColumnsSeeder;
+module.exports = ColumnsSeeder;

@@ -1,5 +1,5 @@
-import { Seeder } from 'mongoose-data-seed';
-import { Templates } from '../models';
+const { Seeder } = require('mongoose-data-seed');
+const { Templates } = require('../models');
 const templates = require('./json/templates.json');
 
 class TemplatesSeeder extends Seeder {
@@ -14,4 +14,4 @@ class TemplatesSeeder extends Seeder {
   }
 }
 
-export default TemplatesSeeder;
+module.exports = TemplatesSeeder;

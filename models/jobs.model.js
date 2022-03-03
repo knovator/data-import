@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import { paginate, toJSON } from '../plugins';
+const mongoose = require('mongoose');
+const { paginate, toJSON, fieldsAlias } = require('./../plugins');
 
 const { Schema, model } = mongoose;
 
@@ -9,8 +9,9 @@ const JobsSchema = new Schema(
     dtg: { type: String, alias: 'deliveryTag' },
     ctg: { type: String, alias: 'consumerTag' },
     exh: { type: String, alias: 'exchange' },
-    uId: { type: Schema.Types.ObjectId, ref: 'Users', required: true },
-    tId: { type: Schema.Types.ObjectId, ref: 'Templates', required: true },
+    uId: { type: Schema.Types.ObjectId, ref: 'Users', required: false },
+    tId: { type: Schema.Types.ObjectId, ref: 'Templates', required: false },
+    filePath: { type: String },
     cbUrl: String,
     status: String,
     startTime: Schema.Types.Date,
@@ -31,4 +32,4 @@ JobsSchema.statics.doseNotExist = async function(options) {
 
 const Jobs = model('Jobs', JobsSchema);
 
-export default Jobs;
+module.exports = Jobs;

@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import { paginate, toJSON, fieldsAlias } from './../plugins';
+const mongoose = require('mongoose');
+const { paginate, toJSON, fieldsAlias } = require('./../plugins');
 
 const { Schema, model } = mongoose;
 
@@ -98,4 +98,4 @@ ColumnSchema.statics.doseNotExist = async function(options) {
 
 const Columns = model('Columns', ColumnSchema);
 
-export default Columns;
+module.exports = Columns;

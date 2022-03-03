@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
@@ -52,4 +52,4 @@ const ActionBySchema = Schema({
 
 const CommonSchemas = { IPSchema, ActionBySchema };
 
-export default CommonSchemas;
+module.exports = CommonSchemas;

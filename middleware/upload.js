@@ -2,6 +2,10 @@ const multer = require('multer');
 const { normalizeFileName } = require('../utils/helper');
 
 const excelFilter = (req, file, cb) => {
+  console.log(
+    'file upload --------------------------------------------------------------------------->>>> ',
+    file
+  );
   if (
     file.mimetype.includes('excel') ||
     file.mimetype.includes('csv') ||
@@ -20,6 +24,7 @@ const storage = multer.diskStorage({
     cb(null, './resources/');
   },
   filename: (req, file, cb) => {
+    console.log('file name -======> ', file.originalname);
     cb(null, `${Date.now()}-${normalizeFileName(file.originalname)}`);
   }
 });

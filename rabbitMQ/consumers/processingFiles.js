@@ -2,10 +2,13 @@ const { QUEUES } = require('../../utils/constant');
 const XLSX = require('xlsx');
 const { publishToQueue } = require('../service');
 const { jobStartLog, jobEndLog, jobErrorLog } = require('../../utils/log');
+const { mongo, env } = require('./../../config/vars');
+const mongoose = require('mongoose');
 
 /**
  *
  * @param {*} msg
+ * @param { consumerTag, deliveryTag, redelivered, exchange, routingKey } msg.fields
  * @returns nothing
  */
 module.exports = async function(msg) {
@@ -14,13 +17,14 @@ module.exports = async function(msg) {
   try {
     // converting buffer data to Object
     const data = JSON.parse(msg.content) || {};
-    const { filePath, ...rest } = data;
+    const { filePath, res, ...rest } = data;
     /**
      * reading XLSX/CSV file, All Sheets and their data list
      * @param {Array} SheetNames => Sheets List
      * @param {Object} Sheets => data list
      *  */
     const workbook = XLSX.readFile(filePath);
+
     const { Sheets, SheetNames } = workbook;
     const payload = [];
     SheetNames.forEach(Sheet => {

@@ -51,6 +51,5 @@ exports.create = async (req, res, next) => {
  * @public
  */
 exports.update = (req, res, next) => {
-  console.log('req', req.body, req.query);
   res.send(httpStatus.OK);
 };

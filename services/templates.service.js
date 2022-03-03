@@ -5,6 +5,9 @@ const path = require('path');
 const { QUEUES } = require('../utils/constant');
 const { publishToQueue } = require('./../rabbitMQ/service');
 
+const XLSX = require('xlsx');
+const { addWorkbook } = require('./workbooks.service');
+
 /**
  * Create a template
  * @param {Object} TemplateBody
@@ -76,6 +79,55 @@ exports.deleteTemplateById = async templateId => {
  */
 exports.processData = async (req, res, next) => {
   const { templateId } = req.params;
+  let { additionalData } = req.body;
+  const { files = [] } = req.files;
+  const [file] = files;
+
+  if (!files.length) return new APIError(httpStatus.EXPECTATION_FAILED);
+
+  const filePath = path.resolve(path.join(__dirname, '../resources/' + file.filename));
+  const template = await this.getTemplateById(templateId);
+  additionalData = additionalData ? JSON.parse(additionalData) : {};
+
+  const workbook = XLSX.readFile(filePath);
+
+  const { Sheets, SheetNames } = workbook;
+  const payload = [];
+
+  const columns = template.columns.map(column => ({
+    name: column.name,
+    field: column.key
+  }));
+
+  await addWorkbook({
+    workbook,
+    columns,
+    tId: templateId,
+    uId: null // not considering for now.
+  })
+
+  SheetNames.forEach(Sheet => {
+    // converting sheet's data into JSON
+    // * It will read upto 156 columns
+    const headers = XLSX.utils.sheet_to_json(Sheets[Sheet], { header: 1, range: 'A1-FZ1' });
+
+    // pushing data into payload
+    payload.push({
+      Sheet,
+      headers,
+      columns,
+      additionalData
+    });
+  });
+
+  res.send({
+    message: "Your file is processing, we'll update you via mail",
+    payload
+  });
+};
+
+exports.readExcel = async (req, res, next) => {
+  const { templateId } = req.params;
   let { additionalData = '' } = req.body;
   const { files = [] } = req.files;
   const [file] = files;
@@ -95,6 +147,7 @@ exports.processData = async (req, res, next) => {
     template,
     ...additionalData
   };
+
   console.log('service calling it');
   await publishToQueue(QUEUES.processingFile, payload);
 };

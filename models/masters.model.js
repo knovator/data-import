@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
-import { paginate, toJSON } from '../plugins';
-import CommonSchema from './common.model';
+const mongoose = require('mongoose');
+const { paginate, toJSON, fieldsAlias } = require('./../plugins');
+const CommonSchema = require('./common.model');
 
 const { Schema, model } = mongoose;
 
@@ -67,4 +67,4 @@ MastersSchema.statics.doseNotExist = async function(options) {
 
 const Masters = model('Masters', MastersSchema);
 
-export default Masters;
+module.exports = Masters;

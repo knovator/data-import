@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+const nodemailer = require('nodemailer');
 
 const sendEmail = async (recipient, url) => {
   const transporter = nodemailer.createTransport({
@@ -33,4 +33,4 @@ const sendEmail = async (recipient, url) => {
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 };
 
-export default sendEmail;
+module.exports = sendEmail;

@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import { paginate, toJSON } from '../plugins';
+const mongoose = require('mongoose');
+const { paginate, toJSON, fieldsAlias } = require('./../plugins');
 
 const { Schema, model } = mongoose;
 
@@ -38,4 +38,4 @@ SucceedJobsSchema.statics.doseNotExist = async function(options) {
 
 const SucceedJobs = model('SucceedJobs', SucceedJobsSchema);
 
-export default SucceedJobs;
+module.exports = SucceedJobs;

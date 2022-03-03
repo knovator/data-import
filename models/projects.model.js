@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
-import { paginate, toJSON, fieldsAlias } from '../plugins';
-import CommonSchemas from './common.model';
+const mongoose = require('mongoose');
+const { paginate, toJSON, fieldsAlias } = require('./../plugins');
+const CommonSchemas = require('./common.model');
 
 const { Schema, model } = mongoose;
 
@@ -84,4 +84,4 @@ ProjectsSchema.statics.doseNotExist = async function(options) {
 
 const Projects = model('Projects', ProjectsSchema);
 
-export default Projects;
+module.exports = Projects;

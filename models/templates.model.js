@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import { paginate, toJSON, fieldsAlias } from '../plugins';
+const mongoose = require('mongoose');
+const { paginate, toJSON, fieldsAlias } = require('./../plugins');
 
 const { Schema, model } = mongoose;
 
@@ -38,6 +38,11 @@ const TemplateSchema = new Schema(
         type: String,
         alias: 'callback.url'
       }
+    },
+    cs: {
+      type: Number,
+      default: 500,
+      alias: 'chunkSize'
     },
     p: {
       cd: {
@@ -96,4 +101,4 @@ TemplateSchema.statics.doseNotExist = async function(options) {
 
 const Templates = model('Templates', TemplateSchema);
 
-export default Templates;
+module.exports = Templates;

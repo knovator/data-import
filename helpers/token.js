@@ -1,5 +1,5 @@
-import crypto from 'crypto';
-import { Token } from '../models';
+const crypto = require('crypto');
+const { Token } = require('../models');
 
 // import sendEmail from '../utils/sendEmail';
 

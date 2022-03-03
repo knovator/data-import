@@ -6,7 +6,6 @@ const { Jobs } = require('../models');
  * @returns
  */
 exports.addJob = async (payload = {}) => {
-  const job = new Jobs(payload);
-  const saved = await job.save();
-  return saved;
+  const job = await Jobs.create(payload);
+  return job;
 };

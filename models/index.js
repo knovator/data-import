@@ -1,16 +1,18 @@
-import Users from './users.model';
-import Token from './tokens.model';
-import Columns from './columns.model';
-import Projects from './projects.model';
-import Templates from './templates.model';
-import Jobs from './jobs.model';
-import FailedJobs from './failed_jobs.model.';
-import SucceedJobs from './succeed_jobs.model';
-import Settings from './settings.model';
-import Files from './files.model';
-import Masters from './masters.model';
-import Roles from './roles.model';
-export {
+const Users = require('./users.model.js');
+const Token = require('./tokens.model');
+const Columns = require('./columns.model');
+const Projects = require('./projects.model');
+const Templates = require('./templates.model');
+const Jobs = require('./jobs.model');
+const FailedJobs = require('./failed_jobs.model.');
+const SucceedJobs = require('./succeed_jobs.model');
+const Settings = require('./settings.model');
+const Files = require('./files.model');
+const Masters = require('./masters.model');
+const Roles = require('./roles.model');
+const Workbooks = require('./workbooks.model');
+
+module.exports = {
   Users,
   Token,
   Columns,
@@ -22,5 +24,6 @@ export {
   Settings,
   Masters,
   Files,
-  Roles
+  Roles,
+  Workbooks
 };

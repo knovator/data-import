@@ -73,3 +73,5 @@ exports.update = (req, res, next) => {
 exports.process = async (req, res, next) => {
   await templateService.processData(req, res, next);
 };
+
+exports.mapFieldsToExcel = async (req, res, next) => {};

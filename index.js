@@ -1,5 +1,5 @@
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
+require('core-js/stable');
+require('regenerator-runtime/runtime');
 const { port } = require('./config/vars');
 const logger = require('./config/logger');
 const app = require('./config/express');

@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import { paginate, toJSON } from '../plugins';
+const mongoose = require('mongoose');
+const { paginate, toJSON, fieldsAlias } = require('./../plugins');
 
 const { Schema, model } = mongoose;
 
@@ -36,4 +36,4 @@ FilesSchema.statics.doseNotExist = async function(options) {
 
 const Files = model('Files', FilesSchema);
 
-export default Files;
+module.exports = Files;

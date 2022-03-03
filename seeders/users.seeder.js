@@ -14,4 +14,4 @@ class UsersSeeder extends Seeder {
   }
 }
 
-export default UsersSeeder;
+module.exports = UsersSeeder;

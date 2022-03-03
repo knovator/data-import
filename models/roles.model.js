@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import { toJSON } from '../plugins';
+const mongoose = require('mongoose');
+const { paginate, toJSON, fieldsAlias } = require('./../plugins');
 
 const { Schema, model } = mongoose;
 
@@ -10,7 +10,7 @@ const { Schema, model } = mongoose;
  * @param w:weight => weight of role to define hierarchy
  * @param a:active => manage role via active
  */
-export const RolesSchema = new Schema(
+const RolesSchema = new Schema(
   {
     nm: {
       type: String,
@@ -53,4 +53,6 @@ RolesSchema.statics.doseNotExist = async function(options) {
 
 const Settings = model('Roles', RolesSchema);
 
-export default Settings;
+Settings.RolesSchema = RolesSchema;
+
+module.exports = Settings;
