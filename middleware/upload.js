@@ -24,7 +24,6 @@ const storage = multer.diskStorage({
     cb(null, './resources/');
   },
   filename: (req, file, cb) => {
-    console.log('file name -======> ', file.originalname);
     cb(null, `${Date.now()}-${normalizeFileName(file.originalname)}`);
   }
 });

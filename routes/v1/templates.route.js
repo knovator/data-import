@@ -22,8 +22,8 @@ router
 
 router
   .route('/:templateId/process-file')
-  .post(upload.fields([{ name: 'files', maxCount: 2 }]), controller.process);
+  .post(upload.fields([{ name: 'files', maxCount: 2 }]), controller.processFile);
 
-router.route('/:templateId/map-data').post(controller.process);
+router.route('/:templateId/map-data').post(controller.mapDataToJson);
 
 module.exports = router;

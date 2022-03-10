@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const { Templates } = require('../models');
+const { Templates, Workbooks } = require('../models');
 const APIError = require('../errors/api-error');
 const path = require('path');
 const { QUEUES } = require('../utils/constant');
@@ -28,18 +28,13 @@ exports.getTemplateById = async templateId => {
 };
 
 /**
- * Query for cities
- * @param {Object} filter - Mongo filter
- * @param {Object} options - Query options
- * @param {string} [options.sortBy] - Sort option in the format: sortField:(desc|asc)
- * @param {number} [options.limit] - Maximum number of results per page (default = 10)
- * @param {number} [options.page] - Current page (default = 1)
- * @returns {Promise<QueryResult>}
+ * Get workbook by id
+ * @param {ObjectId} workbookId
+ * @returns {Promise<Workbook>}
  */
-// const queryCities = async (filter, options) => {
-//   const cities = await Template.paginate(filter, options);
-//   return cities;
-// };
+exports.getWorkbookById = async workbookId => {
+  return Workbooks.findById(workbookId);
+};
 
 /**
  * Update template by id
@@ -72,12 +67,12 @@ exports.deleteTemplateById = async templateId => {
 };
 
 /**
- * Process Excel based on template
+ * Process Excel and read headers and save workbook into database
  * @param {ObjectId} templateId
  * @param {File} excelFile
  * @return {JSON} calls callback url with JSON data
  */
-exports.processData = async (req, res, next) => {
+exports.processExcel = async (req, res, next) => {
   const { templateId } = req.params;
   let { additionalData } = req.body;
   const { files = [] } = req.files;
@@ -94,29 +89,36 @@ exports.processData = async (req, res, next) => {
   const { Sheets, SheetNames } = workbook;
   const payload = [];
 
+  // setting default mapping value
   const columns = template.columns.map(column => ({
     name: column.name,
-    field: column.key
+    mappedTo: column.name,
+    field: column.key,
+    active: true
   }));
 
-  await addWorkbook({
+  const saved = await addWorkbook({
     workbook,
     columns,
+    additionalData,
     tId: templateId,
-    uId: null // not considering for now.
-  })
+    uId: null, // not considering for now.
+    startTime: new Date()
+  });
+
+  additionalData.workbookId = saved;
 
   SheetNames.forEach(Sheet => {
-    // converting sheet's data into JSON
+    // getting headers of excel files for mapping
     // * It will read upto 156 columns
-    const headers = XLSX.utils.sheet_to_json(Sheets[Sheet], { header: 1, range: 'A1-FZ1' });
+    const headers = XLSX.utils.sheet_to_json(Sheets[Sheet], { header: 1, range: 'A1-FZ1' }).flat();
 
     // pushing data into payload
     payload.push({
       Sheet,
       headers,
       columns,
-      additionalData
+      workbookId: saved
     });
   });
 
@@ -126,28 +128,32 @@ exports.processData = async (req, res, next) => {
   });
 };
 
-exports.readExcel = async (req, res, next) => {
+/**
+ * getting mapping data from user and retrieving data from excel workbook and converting to JSON
+ * @param {headers, columns, workbookId} req
+ * @param {*} res
+ * @returns
+ */
+exports.workbookToJson = async (req, res, next) => {
   const { templateId } = req.params;
-  let { additionalData = '' } = req.body;
-  const { files = [] } = req.files;
-  const [file] = files;
+  let { workbookId, headers, columns } = req.body;
 
-  if (!files.length) return new APIError(httpStatus.EXPECTATION_FAILED);
+  if (!workbookId) return new APIError(httpStatus.EXPECTATION_FAILED);
 
-  // TODO: Set Directory based on user and it's project
-  const filePath = path.resolve(path.join(__dirname, '../resources/' + file.filename));
   res.send({
     message: "Your file is processing, we'll update you via mail"
   });
 
   const template = await this.getTemplateById(templateId);
-  additionalData = additionalData ? JSON.parse(additionalData) : {};
+  const workbook = await this.getWorkbookById(workbookId);
+
   const payload = {
-    filePath,
+    columns,
+    headers,
+    workbook,
     template,
-    ...additionalData
+    workbookId
   };
 
-  console.log('service calling it');
   await publishToQueue(QUEUES.processingFile, payload);
 };

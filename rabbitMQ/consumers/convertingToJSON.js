@@ -16,7 +16,8 @@ module.exports = async msg => {
     const errors = [];
     const response = [];
     const schema = await columnsToJoiSchema(template.columns || []);
-    const nameToKeyMapping = await mapColNameToKey(template.columns || []);
+
+    const nameToKeyMapping = await mapColNameToKey(rest.columns || []);
 
     // do validation and manage errors
     payload.forEach(sheet => {

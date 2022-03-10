@@ -55,8 +55,6 @@
 
 //   const user = await Users.findOne({ _id: verifiedToken.user });
 
-//   console.log(user);
-
 //   if (!user || (await user.matchesPassword(newPassword))) {
 //     throw new AuthenticationError(message);
 //   }

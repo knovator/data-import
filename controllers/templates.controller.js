@@ -62,16 +62,21 @@ exports.create = async (req, res, next) => {
  * @public
  */
 exports.update = (req, res, next) => {
-  console.log('req', req.body, req.query);
   res.send(httpStatus.OK);
 };
 
 /**
- * Process File to JSON
+ * Process File to  and retrieve Headers from it
  * @private
  */
-exports.process = async (req, res, next) => {
-  await templateService.processData(req, res, next);
+exports.processFile = async (req, res, next) => {
+  await templateService.processExcel(req, res, next);
 };
 
-exports.mapFieldsToExcel = async (req, res, next) => {};
+/**
+ * Process Workbook to JSON Data
+ * @private
+ */
+exports.mapDataToJson = async (req, res, next) => {
+  await templateService.workbookToJson(req, res, next);
+};

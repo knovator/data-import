@@ -1,7 +1,7 @@
 const Projects = require('../models/projects.model');
 
 /**
- * Find All Projectss
+ * Find All Projects
  * @public
  */
 const findAll = async (req, res) => {

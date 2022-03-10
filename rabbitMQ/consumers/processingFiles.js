@@ -4,6 +4,7 @@ const { publishToQueue } = require('../service');
 const { jobStartLog, jobEndLog, jobErrorLog } = require('../../utils/log');
 const { mongo, env } = require('./../../config/vars');
 const mongoose = require('mongoose');
+const { getWorkbookById } = require('../../services/templates.service');
 
 /**
  *
@@ -17,15 +18,14 @@ module.exports = async function(msg) {
   try {
     // converting buffer data to Object
     const data = JSON.parse(msg.content) || {};
-    const { filePath, res, ...rest } = data;
     /**
      * reading XLSX/CSV file, All Sheets and their data list
      * @param {Array} SheetNames => Sheets List
      * @param {Object} Sheets => data list
      *  */
-    const workbook = XLSX.readFile(filePath);
+    const { workbook, ...rest } = data || {};
+    const { Sheets, SheetNames } = workbook.workbook;
 
-    const { Sheets, SheetNames } = workbook;
     const payload = [];
     SheetNames.forEach(Sheet => {
       // converting sheet's data into JSON

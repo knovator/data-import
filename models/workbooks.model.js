@@ -9,6 +9,7 @@ const WorkbooksSchema = new Schema(
     tId: { type: Schema.Types.ObjectId, ref: 'Templates', required: false },
     workbook: Object,
     template: Object,
+    additionalData: Object,
     startTime: Schema.Types.Date,
     endTime: Schema.Types.Date
   },

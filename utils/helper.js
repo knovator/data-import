@@ -7,7 +7,6 @@ const { DT_TO_JOI_DT_MAPPING } = require('./constant');
  * @return {String} Normalized fileName
  */
 exports.normalizeFileName = fileName => {
-  console.log('fileName', fileName);
   if (typeof fileName === 'string') {
     let name = fileName.replaceAll('[^a-zA-Z0-9_-]', '_');
     name = name.toLowerCase();
@@ -69,7 +68,7 @@ exports.columnsToJoiSchema = async (columns = []) => {
 exports.mapColNameToKey = async columns => {
   const obj = {};
   columns.forEach(column => {
-    obj[column.nm] = column.k;
+    obj[column.mappedTo] = column.field;
   });
   return obj;
 };
