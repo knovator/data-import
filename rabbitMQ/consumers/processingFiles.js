@@ -23,7 +23,7 @@ module.exports = async function(msg) {
      * @param {Array} SheetNames => Sheets List
      * @param {Object} Sheets => data list
      *  */
-    const { workbook, ...rest } = data || {};
+    const { workbook, additionalData, ...rest } = data || {};
     const { Sheets, SheetNames } = workbook.workbook;
 
     const payload = [];
@@ -37,7 +37,7 @@ module.exports = async function(msg) {
       });
     });
     jobEndLog(QUEUES.processingFile);
-    await publishToQueue(QUEUES.convertingToJSON, { payload, ...rest });
+    await publishToQueue(QUEUES.convertingToJSON, { ...rest, ...additionalData, payload });
   } catch (e) {
     jobErrorLog(QUEUES.processingFile, e);
     return e;
