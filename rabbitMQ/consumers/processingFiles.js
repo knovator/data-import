@@ -37,7 +37,7 @@ module.exports = async function(msg) {
       });
     });
     jobEndLog(QUEUES.processingFile);
-    await publishToQueue(QUEUES.convertingToJSON, { ...rest, ...additionalData, payload });
+    await publishToQueue(QUEUES.convertingToJSON, { ...rest, ...workbook.additionalData, payload });
   } catch (e) {
     jobErrorLog(QUEUES.processingFile, e);
     return e;

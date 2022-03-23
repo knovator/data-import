@@ -136,7 +136,7 @@ exports.processExcel = async (req, res, next) => {
  */
 exports.workbookToJson = async (req, res, next) => {
   const { templateId } = req.params;
-  let { workbookId, headers, columns } = req.body;
+  let { workbookId, headers, columns, ...other } = req.body;
 
   if (!workbookId) return new APIError(httpStatus.EXPECTATION_FAILED);
 
@@ -148,6 +148,7 @@ exports.workbookToJson = async (req, res, next) => {
   const workbook = await this.getWorkbookById(workbookId);
 
   const payload = {
+    ...other,
     columns,
     headers,
     workbook,
