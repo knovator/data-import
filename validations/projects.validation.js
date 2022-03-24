@@ -14,20 +14,18 @@ module.exports = {
 
   // POST /v1/projects
   createProject: {
-    body: {
-      name: Joi.string()
-        .min(3)
-        .required(),
-      code: Joi.string()
-        .uppercase()
-        .min(3)
-        .required(),
-      callbackUrl: Joi.string(),
-      user: Joi.object({
-        userId: Joi.objectId(),
-        userName: Joi.string()
-      })
-    }
+    name: Joi.string()
+      .min(3)
+      .required(),
+    code: Joi.string()
+      .uppercase()
+      .min(3)
+      .required(),
+    callbackUrl: Joi.string(),
+    user: Joi.object({
+      userId: Joi.objectId(),
+      userName: Joi.string()
+    })
   },
 
   // PUT /v1/projects/:projectId

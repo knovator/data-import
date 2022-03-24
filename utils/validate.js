@@ -1,4 +1,7 @@
+const { Joi } = require('express-validation');
+
 const validate = validator => {
+  validator = Joi.object(validator);
   return async function(req, res, next) {
     try {
       req.body = await validator.validateAsync(req.body);
