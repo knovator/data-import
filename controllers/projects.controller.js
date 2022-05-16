@@ -102,10 +102,9 @@ exports.list = async (req, res, next) => {
  */
 exports.create = async (req, res, next) => {
   try {
-    const project = new Projects(req.body);
-    const saved = await project.save();
+    await Projects.create(req.body);
     res.status(httpStatus.CREATED);
-    res.json(saved);
+    res.json({ status: 200 });
   } catch (error) {
     next(error);
   }

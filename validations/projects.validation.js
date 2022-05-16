@@ -14,15 +14,15 @@ module.exports = {
 
   // POST /v1/projects
   createProject: {
-    name: Joi.string()
+    nm: Joi.string()
       .min(3)
       .required(),
-    code: Joi.string()
+    cd: Joi.string()
       .uppercase()
       .min(3)
       .required(),
-    callbackUrl: Joi.string(),
-    user: Joi.object({
+    cbUrl: Joi.string(),
+    u: Joi.object({
       userId: Joi.objectId(),
       userName: Joi.string()
     })
