@@ -9,17 +9,30 @@ const FilesSchema = new Schema(
       type: Schema.Types.ObjectId,
       required: true
     },
-    name: {
-      type: String,
-      validate: {
-        validator: name => Files.doseNotExist({ name }),
-        message: () => 'name has already been taken.'
-      }
+    fieldname: {
+      type: String
     },
-    size: String,
-    mimeType: String,
-    uId: Schema.Types.ObjectId,
-    tId: Schema.Types.ObjectId
+    originalname: {
+      type: String
+    },
+    encoding: {
+      type: String
+    },
+    mimetype: {
+      type: String
+    },
+    destination: {
+      type: String
+    },
+    filename: {
+      type: String
+    },
+    path: {
+      type: String
+    },
+    size: {
+      type: String
+    }
   },
   {
     timestamps: true
@@ -30,7 +43,7 @@ const FilesSchema = new Schema(
 FilesSchema.plugin(toJSON);
 FilesSchema.plugin(paginate);
 
-FilesSchema.statics.doseNotExist = async function(options) {
+FilesSchema.statics.doseNotExist = async function (options) {
   return (await this.where(options).countDocuments()) === 0;
 };
 
