@@ -22,7 +22,6 @@ module.exports = async msg => {
 
     if (!template.callback) return new Error('Callback Url Not Found !');
 
-    console.log({ errors });
     const overview = {
       Project: template.p?.nm,
       Template: template.nm,
@@ -65,6 +64,10 @@ module.exports = async msg => {
     };
 
     await Promise.all(promise).then(async e => {
+      console.log('----------------------------JOB DETAIL---------------------------------');
+      console.table(overview);
+      console.log('----------------------------JOB ERRORS---------------------------------');
+      console.table(errors);
       console.log(
         '--------------------------------------> JOB IS DONE <-----------------------------------'
       );
