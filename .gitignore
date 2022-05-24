@@ -6,3 +6,4 @@ package-lock.json
 yarn.lock
 resources/*.xlsx
 resources/*
+src/server/resources
