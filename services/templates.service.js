@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const { Templates, Workbooks } = require('../models');
+const { Templates, Workbooks, Files } = require('../models');
 const APIError = require('../errors/api-error');
 const path = require('path');
 const { QUEUES } = require('../utils/constant');
@@ -81,6 +81,9 @@ exports.processExcel = async (req, res, next) => {
   if (!files.length) return new APIError(httpStatus.EXPECTATION_FAILED);
 
   const filePath = path.resolve(path.join(__dirname, '../resources/' + file.filename));
+
+  const fileInfo = await Files.create(file);
+
   const template = await this.getTemplateById(templateId);
   additionalData = additionalData ? JSON.parse(additionalData) : {};
 
@@ -118,7 +121,8 @@ exports.processExcel = async (req, res, next) => {
       Sheet,
       headers,
       columns,
-      workbookId: saved
+      workbookId: saved,
+      file: fileInfo
     });
   });
 

@@ -22,19 +22,16 @@ module.exports = async msg => {
 
     if (!template.callback) return new Error('Callback Url Not Found !');
 
-    if (errors.length) {
-      console.log({ errors });
-    } else {
-      console.table({
-        Project: template.p?.nm,
-        Template: template.nm,
-        User: other?.user?.name,
-        Company: other?.company?.name,
-        Total: rows.length,
-        'Callback Method': template.callback?.method,
-        'Callback Url': template.callback?.url
-      });
-    }
+    console.log({ errors });
+    const overview = {
+      Project: template.p?.nm,
+      Template: template.nm,
+      User: other?.user?.name,
+      Company: other?.company?.name,
+      Total: rows.length,
+      'Callback Method': template.callback?.method,
+      'Callback Url': template.callback?.url
+    };
 
     setAPIConfig({
       baseUrl: template.callback.url,
@@ -49,7 +46,9 @@ module.exports = async msg => {
         data: {
           template,
           ...other,
-          rows: data
+          rows: data,
+          overview,
+          errors
         }
       })
     );
