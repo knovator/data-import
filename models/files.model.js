@@ -6,8 +6,7 @@ const { Schema, model } = mongoose;
 const FilesSchema = new Schema(
   {
     id: {
-      type: Schema.Types.ObjectId,
-      required: true
+      type: Schema.Types.ObjectId
     },
     fieldname: {
       type: String
@@ -43,7 +42,7 @@ const FilesSchema = new Schema(
 FilesSchema.plugin(toJSON);
 FilesSchema.plugin(paginate);
 
-FilesSchema.statics.doseNotExist = async function (options) {
+FilesSchema.statics.doseNotExist = async function(options) {
   return (await this.where(options).countDocuments()) === 0;
 };
 
