@@ -82,7 +82,7 @@ exports.processExcel = async (req, res, next) => {
 
   const filePath = path.resolve(path.join(__dirname, '../resources/' + file.filename));
 
-  await Files.create(file);
+  const fileInfo = await Files.create(file);
 
   const template = await this.getTemplateById(templateId);
   additionalData = additionalData ? JSON.parse(additionalData) : {};
@@ -122,7 +122,7 @@ exports.processExcel = async (req, res, next) => {
       headers,
       columns,
       workbookId: saved,
-      files: files
+      file: fileInfo
     });
   });
 
