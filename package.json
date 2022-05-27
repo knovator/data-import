@@ -11,7 +11,7 @@
     "dev": "nodemon -r esm -r dotenv/config index.js dotenv_config_path=../../.env",
     "mq-service": "node rabbitMQ/service.js",
     "mq-worker": "node rabbitMQ/worker.js",
-    "pm2": "pm2 start yarn --name '1111-data-import' -- start"
+    "pm2": "pm2 start yarn --name '1111-data-import' -- start",
     "pm2-service": "pm2 start yarn --name '1111-data-import-mq-service' -- mq-service",
     "pm2-worker": "pm2 start yarn --name '1111-data-import-mq-worker' -- mq-worker"
   },
