@@ -34,8 +34,8 @@ module.exports = async msg => {
           errors.push({
             Sheet: sheet.Sheet,
             rowNumber: dIndex,
-            data: error._original,
-            error: error.details
+            // data: error._original,
+            error: error.details.map(x => x.message)
           });
       });
       response.push({

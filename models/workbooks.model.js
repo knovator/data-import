@@ -7,7 +7,7 @@ const WorkbooksSchema = new Schema(
   {
     uId: { type: Schema.Types.ObjectId, ref: 'Users', required: false },
     tId: { type: Schema.Types.ObjectId, ref: 'Templates', required: false },
-    workbook: Object,
+    wPath: String,
     template: Object,
     additionalData: Object,
     startTime: Schema.Types.Date,

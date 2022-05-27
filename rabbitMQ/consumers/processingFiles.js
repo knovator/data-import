@@ -5,6 +5,7 @@ const { jobStartLog, jobEndLog, jobErrorLog } = require('../../utils/log');
 const { mongo, env } = require('./../../config/vars');
 const mongoose = require('mongoose');
 const { getWorkbookById } = require('../../services/templates.service');
+const fs = require('fs');
 
 /**
  *
@@ -24,7 +25,8 @@ module.exports = async function(msg) {
      * @param {Object} Sheets => data list
      *  */
     const { workbook, additionalData, ...rest } = data || {};
-    const { Sheets, SheetNames } = workbook.workbook;
+    const workbookFile = await fs.readFileSync(workbook.wPath);
+    const { Sheets, SheetNames } = JSON.parse(workbookFile) || {};
 
     const payload = [];
     SheetNames.forEach(Sheet => {
