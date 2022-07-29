@@ -1,22 +1,4 @@
 <div id="top"></div>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
-
-
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
 
 <!-- PROJECT LOGO -->
 <br />
@@ -57,12 +39,25 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
+    <li>
+      <a href="#usage">Usage</a>
+      <ul>
+        <li>
+          <a href="#routes">Routes</a>
+          <ul>
+            <li><a href="#health-check">Health Check</a></li>
+            <li><a href="#user-routes">User Routes</a></li>
+            <li><a href="#project-routes">Project Routes</a></li>
+            <li><a href="#templates-routes">Templates Routes</a></li>
+            <li><a href="#columns-routes">Columns Routes</a></li>
+          </ul>
+        </li>
+        <li><a href="#usage-flow">Flow</a></li>
+      </ul>
+    </li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -136,7 +131,7 @@ Often times uploaded spreadsheets in projects are too large to handle at once by
 | --- | --- | --- | ----------- | --- | --- |
 | `/v1/status` | `GET` | | Returns **OK**, if application is running well | | |
 
-#### User
+#### User Routes
 User Routes deals with User schema listed in [user-schema](data-formats.md#user-schema).
 | path | Method | Validations | Description | Accepts | Returns |
 | --- | --- | --- | ----------- | --- | --- |
@@ -153,7 +148,7 @@ Project Routes deals with Project schema listed in [data-formats.md#project-sche
 | `/v1/projects/` | `GET` | | Get projects with Pagination | | |
 
 
-#### Templates
+#### Templates Routes
 Templates Routes deals with Templates schema listed in [data-formats.md#template-schema](data-formats.md#template-schema).
 | path | Method | Validations | Description | Accepts | Returns |
 | --- | --- | --- | ----------- | ----------- | ----------- |
@@ -162,7 +157,7 @@ Templates Routes deals with Templates schema listed in [data-formats.md#template
 | `/v1/templates/:templateId/process-file` | `POST` | | Upload spreadsheet | **files** in body | Uploaded spreadsheet data details |
 | `/v1/templates/:templateId/map-data` | `POST` | | Map spreadsheet Data | Uploaded spreadsheet data details | |
 
-#### Columns
+#### Columns Routes
 Columns Routes deals with Column schema listed in [data-formats.md#column-schema](data-formats.md#column-schema).
 | path | Method | Validations | Description | Accepts | Returns |
 | --- | --- | --- | ----------- | ----------- | ----------- |
